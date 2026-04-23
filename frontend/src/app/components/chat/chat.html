@@ -1,0 +1,46 @@
+<div class="app-layout">
+  
+  <aside class="sidebar">
+    <div class="brand">
+      <h1>GAIN-Radar</h1>
+      <span class="subtitle"></span>
+    </div>
+
+    <div class="modes-menu">
+      <h3>Lernmodi</h3>
+      <button [class.active]="selectedMode === 'tutor'" (click)="setMode('tutor')">🎓 Tutor-Modus</button>
+      <button [class.active]="selectedMode === 'quiz'" (click)="setMode('quiz')">❓ Quiz-Modus</button>
+      <button [class.active]="selectedMode === 'flashcards'" (click)="setMode('flashcards')">🃏 Lernkarten</button>
+      <button [class.active]="selectedMode === 'summary'" (click)="setMode('summary')">📝 Zusammenfassung</button>
+    </div>
+  </aside>
+
+  <main class="chat-container">
+    <header class="chat-header">
+      <h2>{{ getModeName() }}</h2>
+      <span class="status"></span>
+    </header>
+
+    <div class="chat-window">
+      <div *ngFor="let msg of messages" class="message" [ngClass]="msg.sender">
+        <div class="bubble">
+          <p>{{ msg.text }}</p>
+          <small *ngIf="msg.sources && msg.sources.length > 0">
+            Quelle: {{ msg.sources.join(', ') }}
+          </small>
+        </div>
+      </div>
+      <div *ngIf="isLoading" class="message bot">
+        <div class="bubble typing">Agent überlegt...</div>
+      </div>
+    </div>
+
+    <div class="input-area">
+      <div class="input-wrapper">
+        <input [(ngModel)]="userInput" (keyup.enter)="sendMessage()" placeholder="Schreibe eine Nachricht im {{ getModeName() }}...">
+        <button (click)="sendMessage()" [disabled]="isLoading">Senden</button>
+      </div>
+    </div>
+  </main>
+
+</div>
