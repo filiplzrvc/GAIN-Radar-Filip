@@ -1,0 +1,22 @@
+{
+  "courses": [
+    {
+      "code": "aief",
+      "name": "Artificial Intelligence Einführung",
+      "description": "Grundlagen der KI, Logik, Maschinelles Lernen und Neuronale Netze",
+      "language": "de"
+    },
+    {
+      "code": "itsec",
+      "name": "IT Security Basics",
+      "description": "Cryptography, PKI, MFA, Malware, Firewalls and Secure Communications",
+      "language": "en"
+    },
+    {
+      "code": "swen",
+      "name": "Software Engineering",
+      "description": "C# Programming, Object-Oriented Programming (OOP), SOLID Principles, Layered Architecture, REST & HTTP, Collections & Streams (.NET), Serialization (CSV, XML), Docker & PostgreSQL, Unit Testing & Mocking",
+      "language": "en"
+    }
+  ]
+}
