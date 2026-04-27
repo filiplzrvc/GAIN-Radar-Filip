@@ -1,22 +1,25 @@
-#FastAPI-Hauptanwendung des GAIN-Radar Backends.
+"""FastAPI-Hauptanwendung des GAIN-Radar Backends."""
+# WICHTIG: load_dotenv() muss VOR allen App-Imports stehen,
+# damit OPENAI_API_KEY beim Import von analysis_agent verfügbar ist.
+from dotenv import load_dotenv
+load_dotenv()
+
 import json
 from pathlib import Path
 
 import uvicorn
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
-from dotenv import load_dotenv
 
 from app.models.schema import (
     ChatRequest, ChatResponse,
     CourseInfo, CoursesResponse
 )
-from app.agents.tutor_agent import get_tutor_response
+from app.workflow.orchestrator import process_request
 
-load_dotenv()
+app = FastAPI(title="GAIN-Radar Backend API", version="0.3.0")
 
-app = FastAPI(title="GAIN-Radar Backend API", version="0.2.0")
-
+# CORS für Angular-Frontend
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["http://localhost:4200"],
@@ -26,7 +29,7 @@ app.add_middleware(
 
 
 def load_courses() -> list[dict]:
-    #Lädt config/courses.json
+    """Lädt config/courses.json."""
     config_path = Path(__file__).parent / "config" / "courses.json"
     with open(config_path, "r", encoding="utf-8") as f:
         return json.load(f)["courses"]
@@ -34,7 +37,7 @@ def load_courses() -> list[dict]:
 
 @app.get("/api/courses", response_model=CoursesResponse)
 async def get_courses():
-    #Gibt eine Liste aller verfügbaren Fächer zurück.
+    """Gibt eine Liste aller verfügbaren Fächer zurück."""
     try:
         courses_data = load_courses()
         courses = [CourseInfo(**c) for c in courses_data]
@@ -47,7 +50,10 @@ async def get_courses():
 
 @app.post("/api/chat", response_model=ChatResponse)
 async def chat_endpoint(request: ChatRequest):
-    #Verarbeitet eine Chat-Anfrage
+    """
+    Verarbeitet eine Chat-Anfrage über den agentischen Workflow.
+    """
+    # Validierung: Existiert das Fach?
     valid_codes = [c["code"] for c in load_courses()]
     if request.course not in valid_codes:
         raise HTTPException(
@@ -56,22 +62,34 @@ async def chat_endpoint(request: ChatRequest):
         )
     
     try:
-        result = get_tutor_response(request.text, course_code=request.course)
-        return ChatResponse(
-            reply=result["reply"],
-            sources=result["sources"],
-            mode_used=request.mode,
-            course_used=request.course,
+        # Statt direktem tutor_agent → Orchestrator mit allen 4 Agenten
+        state = process_request(
+            question=request.text,
+            course=request.course,
+            mode=request.mode,
             session_id=request.session_id
         )
+        
+        return ChatResponse(
+            reply=state.final_answer or "Es ist ein Fehler aufgetreten.",
+            sources=state.sources_used,
+            session_id=state.session_id,
+            mode_used=state.mode,
+            course_used=state.course
+        )
     except Exception as e:
-        print(f" Fehler in /api/chat: {e}")
+        print(f"Fehler in /api/chat: {e}")
         raise HTTPException(status_code=500, detail=str(e))
 
 
 @app.get("/api/health")
 async def health_check():
-    return {"status": "ok", "version": "0.2.0"}
+    """Health-Check mit Versions- und Workflow-Info."""
+    return {
+        "status": "ok",
+        "version": "0.3.0",
+        "workflow": "agentic"
+    }
 
 
 if __name__ == "__main__":

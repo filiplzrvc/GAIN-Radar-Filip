@@ -7,27 +7,17 @@ from dotenv import load_dotenv
 load_dotenv()
 
 from app.workflow.state import WorkflowState
-from app.workflow.analysis_agent import run_analysis_agent
-from app.workflow.retrieval_agent import retrieve_documents
-from app.workflow.context_agent import prepare_context
-from app.workflow.answer_agent import run_answer_agent
+from app.workflow.orchestrator import process_request
 
 
 def run_full_pipeline(question: str, course: str) -> WorkflowState:
-    #Führt alle 4 Pipeline-Schritte aus und gibt den State zurück
+    """Führt die gesamte Pipeline über den Orchestrator aus."""
     print("\n" + "=" * 70)
-    print(f" Frage: '{question}'")
-    print(f" Fach: {course}")
+    print(f"Frage: '{question}'")
+    print(f"Fach: {course}")
     print("=" * 70)
     
-    state = WorkflowState(user_question=question, course=course)
-    
-    state = run_analysis_agent(state)
-    state = retrieve_documents(state)
-    state = prepare_context(state)
-    state = run_answer_agent(state)
-    
-    return state
+    return process_request(question=question, course=course)
 
 
 def print_result(state: WorkflowState):
