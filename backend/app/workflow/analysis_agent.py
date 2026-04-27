@@ -24,21 +24,12 @@ from app.core.prompts import analysis_prompt
 from app.workflow.state import WorkflowState
 
 
-# Separates LLM für den Analyse-Agenten.
-# Temperature=0 → immer gleiche Antworten bei gleicher Frage (wichtig für Klassifikation)
+
 analysis_llm = ChatOpenAI(model="gpt-4o-mini", temperature=0)
 
 
 def run_analysis_agent(state: WorkflowState) -> WorkflowState:
-    """
-    Führt die Anfrageanalyse durch und aktualisiert den State.
-    
-    Args:
-        state: Der eingehende WorkflowState mit user_question
-    
-    Returns:
-        Der gleiche State, angereichert mit Analyseergebnissen
-    """
+
     state.log("AnfrageanalyseAgent", f"Analysiere Frage: '{state.user_question[:60]}...'")
     
     # LLM-Chain bauen: Prompt → LLM → String
@@ -47,12 +38,8 @@ def run_analysis_agent(state: WorkflowState) -> WorkflowState:
     try:
         # LLM aufrufen
         raw_response = chain.invoke({"user_input": state.user_question})
-        
-        # Manchmal gibt das LLM Markdown-Codeblöcke zurück: ```json ... ```
-        # Die strippen wir raus, damit json.loads klappt
         cleaned = raw_response.strip()
         if cleaned.startswith("```"):
-            # Erste und letzte Zeile (die ```) entfernen
             lines = cleaned.split("\n")
             cleaned = "\n".join(lines[1:-1])
         

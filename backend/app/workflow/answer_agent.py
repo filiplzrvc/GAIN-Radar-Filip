@@ -18,13 +18,10 @@ from app.core.prompts import answer_prompt
 from app.workflow.state import WorkflowState
 
 
-# Eigenes LLM für den Antwort-Agent.
-# Niedrige Temperatur für faktische Antworten, etwas höher als Analyse 
-# für eine natürliche Sprache.
 answer_llm = ChatOpenAI(model="gpt-4o-mini", temperature=0.1)
 
 
-# === Deterministische Antworten (kein LLM nötig) ===
+# Deterministische Antworten (kein LLM nötig)
 
 OFF_TOPIC_RESPONSES = {
     "de": (

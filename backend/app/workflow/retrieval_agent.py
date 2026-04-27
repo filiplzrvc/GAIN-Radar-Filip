@@ -12,16 +12,6 @@ from app.core.retriever import get_context_retriever
 
 
 def retrieve_documents(state: WorkflowState) -> WorkflowState:
-    """
-    Holt relevante Dokumente aus dem Vektorstore basierend auf der Nutzerfrage.
-    
-    Args:
-        state: Workflow-State mit user_question und course
-    
-    Returns:
-        Aktualisierter State mit retrieved_documents
-    """
-    
     # Defensive Checks
     if state.decisions.off_topic:
         state.log("RetrievalAgent", "Übersprungen: Frage ist off-topic")
