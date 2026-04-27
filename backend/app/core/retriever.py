@@ -29,18 +29,19 @@ def _get_vectorstore_for_namespace(namespace: str):
         namespace=namespace
     )
 
+"""
+Gibt einen Retriever zurück, der nur im Namespace eines Fachs sucht.
+    
+Args:
+    course_code: Der Fach-Code (z.B. "aief", "itsec", "swen")
+    top_k: Wie viele Dokumente max. zurückgegeben werden sollen
+    
+Raises:
+    ValueError: Wenn course_code leer ist
+"""
 
 def get_context_retriever(course_code: str, top_k: int = RETRIEVAL_TOP_K):
-    """
-    Gibt einen Retriever zurück, der nur im Namespace eines Fachs sucht.
-    
-    Args:
-        course_code: Der Fach-Code (z.B. "aief", "itsec", "swen")
-        top_k: Wie viele Dokumente max. zurückgegeben werden sollen
-    
-    Raises:
-        ValueError: Wenn course_code leer ist
-    """
+
     if not course_code or not course_code.strip():
         raise ValueError(
             "course_code darf nicht leer sein. "

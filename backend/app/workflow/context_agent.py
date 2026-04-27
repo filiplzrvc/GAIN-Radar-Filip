@@ -7,8 +7,6 @@ Aufgabe:
 - Filtert Müll-Chunks raus (zu kurz, doppelt, irrelevant)
 - Baut einen strukturierten Context-String für das Antwort-LLM
 - Setzt context_quality im State, die der Antwort-Agent nutzt
-
-Das ist der ANTI-HALLUZINATIONS-AGENT!
 """
 from app.workflow.state import WorkflowState
 
@@ -18,9 +16,7 @@ MIN_CHUNK_LENGTH = 50          # Chunks unter 50 Zeichen sind nicht gebrauchbar
 MIN_DOCS_FOR_GOOD_CONTEXT = 3  # Mind. 3 Dokumente für "gute" Qualität
 MIN_TOTAL_CONTEXT_LENGTH = 500 # Gesamttext mind. 500 Zeichen
 
-
-def prepare_context(state: WorkflowState) -> WorkflowState:
-    """
+"""
     Filtert und bewertet den Kontext, bereitet ihn für den Antwort-Agent vor.
     
     Args:
@@ -28,7 +24,9 @@ def prepare_context(state: WorkflowState) -> WorkflowState:
     
     Returns:
         Aktualisierter State mit prepared_context und context_quality
-    """
+"""
+
+def prepare_context(state: WorkflowState) -> WorkflowState:
     
     # Wenn Retrieval übersprungen wurde, auch hier nichts tun
     if state.decisions.off_topic or state.decisions.clarification_needed:

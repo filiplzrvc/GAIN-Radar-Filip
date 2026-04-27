@@ -1,6 +1,4 @@
-"""
-WorkflowState - Der "Rucksack" des agentischen Workflows.
-
+"""WorkflowState: Der zentrale State, der durch alle Agenten wandert.
 Dieses Objekt wird durch ALLE Agenten gereicht und sammelt auf dem Weg
 alle Informationen: Nutzerfrage, erkannter Modus, geholte Dokumente,
 Entscheidungen der Agenten, finale Antwort, etc.
@@ -25,7 +23,6 @@ class RetrievedDocument:
 class AgentDecisions:
     """
     Sammelt alle Entscheidungen, die Agenten während des Workflows treffen.
-    Siehe PDF Kapitel 10 - agent_decisions in der JSON-Struktur.
     """
     off_topic: bool = False              # Ist die Frage themenfremd?
     clarification_needed: bool = False   # Muss Nutzer nachgefragt werden?
@@ -82,17 +79,16 @@ class WorkflowState:
     def log(self, agent_name: str, message: str) -> None:
         """
         Hilfsmethode für Agenten, um ihre Aktivitäten zu dokumentieren.
-        Siehe PDF Kapitel 11 "Logging und Nachvollziehbarkeit".
         """
         entry = f"[{agent_name}] {message}"
         self.trace.append(entry)
-        print(f"   {entry}")  # Live-Ausgabe in die Konsole zum Debuggen
+        print(f"{entry}")  # Live-Ausgabe in die Konsole zum Debuggen
     
     
     def to_dict(self) -> dict:
         """
         Konvertiert den State in ein Dictionary - wird später für die
-        JSON-Speicherung im Session-Memory gebraucht (siehe PDF Kap. 10).
+        JSON-Speicherung im Session-Memory gebraucht
         """
         return {
             "session_id": self.session_id,

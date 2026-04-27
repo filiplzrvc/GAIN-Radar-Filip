@@ -88,11 +88,3 @@ print_result(state)
 assert state.language == "en"
 assert len(state.sources_used) > 0
 print("\n Test 5 OK")
-
-
-print("\n\n ALLE TESTS DURCHGELAUFEN!")
-print("\n Was Phase 4 gebracht hat:")
-print("   - 3 von 5 Fällen brauchen keinen LLM-Call (off-topic, clarification, no context)")
-print("   - Cross-Course-Halluzinationen werden durch RAG-Treue-Prompt abgefangen")
-print("   - Strukturierte Quellen-Ausgabe für Transparenz")
-print("\n   Phase 4 fertig! Nächste Schritte: Orchestrator + main.py-Integration")

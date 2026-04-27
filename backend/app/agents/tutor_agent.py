@@ -11,15 +11,16 @@ load_dotenv()
 
 llm = ChatOpenAI(model="gpt-4o-mini", temperature=0.1)
 
+"""
+Generiert eine Tutor-Antwort basierend auf dem ausgewählten Fach.
+    
+Args:
+    user_input: Die Frage des Studierenden
+    course_code: Der Fach-Namespace (z.B. "aief")
+"""
 
 def get_tutor_response(user_input: str, course_code: str) -> dict:
-    """
-    Generiert eine Tutor-Antwort basierend auf dem ausgewählten Fach.
     
-    Args:
-        user_input: Die Frage des Studierenden
-        course_code: Der Fach-Namespace (z.B. "aief")
-    """
     retriever = get_context_retriever(course_code=course_code)
     docs = retriever.invoke(user_input)
     

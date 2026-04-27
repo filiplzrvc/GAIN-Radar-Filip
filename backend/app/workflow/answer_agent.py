@@ -125,7 +125,7 @@ def run_answer_agent(state: WorkflowState) -> WorkflowState:
             state.final_answer = _generate_llm_answer(state, with_warning=True)
             state.sources_used = _format_sources(state)
         except Exception as e:
-            state.log("AntwortAgent", f"❌ LLM-Fehler: {e}")
+            state.log("AntwortAgent", f"LLM-Fehler: {e}")
             state.final_answer = _get_response(NO_CONTEXT_RESPONSES, state.language or "de")
             state.sources_used = []
         return state
@@ -136,7 +136,7 @@ def run_answer_agent(state: WorkflowState) -> WorkflowState:
         state.final_answer = _generate_llm_answer(state, with_warning=False)
         state.sources_used = _format_sources(state)
     except Exception as e:
-        state.log("AntwortAgent", f"❌ LLM-Fehler: {e}")
+        state.log("AntwortAgent", f"LLM-Fehler: {e}")
         state.final_answer = (
             "Es ist ein Fehler bei der Antwort-Generierung aufgetreten. "
             "Bitte versuche es erneut."

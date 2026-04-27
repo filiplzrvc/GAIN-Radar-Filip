@@ -142,7 +142,7 @@ def index_course(course_code: str, course_name: str, dry_run: bool = False):
         try:
             vectorstore.add_texts(texts=batch_texts, metadatas=batch_meta)
             total_uploaded += len(batch_texts)
-            print(f"      Batch {i // BATCH_SIZE + 1}: {total_uploaded}/{len(texts)} hochgeladen")
+            print(f"Batch {i // BATCH_SIZE + 1}: {total_uploaded}/{len(texts)} hochgeladen")
             time.sleep(1)  # Rate-Limiting
         except Exception as e:
             print(f" Fehler bei Batch {i // BATCH_SIZE + 1}: {e}")
