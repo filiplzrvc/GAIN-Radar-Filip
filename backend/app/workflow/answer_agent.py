@@ -1,6 +1,5 @@
 """
-Antwort-Agent (Phase 4).
-PDF-Referenz: Kap. 5.6 - Antwort-Agent
+Antwort-Agent 
 
 Aufgabe:
 - Bekommt einen vollständig analysierten und vorbereiteten WorkflowState
@@ -101,28 +100,28 @@ def run_answer_agent(state: WorkflowState) -> WorkflowState:
     """
     state.log("AntwortAgent", "Wähle Antwortstrategie...")
     
-    # === STRATEGIE 1: Off-Topic ===
+    # STRATEGIE 1: Off-Topic
     if state.decisions.off_topic:
         state.final_answer = _get_response(OFF_TOPIC_RESPONSES, state.language or "de")
         state.sources_used = []
         state.log("AntwortAgent", "Strategie: Off-Topic-Ablehnung (kein LLM)")
         return state
     
-    # === STRATEGIE 2: Klärung nötig ===
+    # STRATEGIE 2: Klärung nötig 
     if state.decisions.clarification_needed:
         state.final_answer = _get_response(CLARIFICATION_RESPONSES, state.language or "de")
         state.sources_used = []
         state.log("AntwortAgent", "Strategie: Rückfrage (kein LLM)")
         return state
     
-    # === STRATEGIE 3: Kein Kontext gefunden ===
+    # STRATEGIE 3: Kein Kontext gefunden 
     if state.context_quality == "none":
         state.final_answer = _get_response(NO_CONTEXT_RESPONSES, state.language or "de")
         state.sources_used = []
         state.log("AntwortAgent", "Strategie: Kein Kontext (kein LLM)")
         return state
     
-    # === STRATEGIE 4: Wenig Kontext - LLM mit Warnung ===
+    # STRATEGIE 4: Wenig Kontext - LLM mit Warnung
     if state.context_quality == "insufficient":
         state.log("AntwortAgent", "Strategie: LLM mit Insufficient-Warnung")
         try:
@@ -134,7 +133,7 @@ def run_answer_agent(state: WorkflowState) -> WorkflowState:
             state.sources_used = []
         return state
     
-    # === STRATEGIE 5: Guter Kontext - normale RAG-Antwort ===
+    # STRATEGIE 5: Guter Kontext - normale RAG-Antwort
     state.log("AntwortAgent", "Strategie: Normale RAG-Antwort")
     try:
         state.final_answer = _generate_llm_answer(state, with_warning=False)

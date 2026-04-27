@@ -1,4 +1,4 @@
-"""Pydantic-Schemas für API-Anfragen und -Antworten."""
+#Pydantic-Schemas für API-Anfragen und -Antworten
 from pydantic import BaseModel, Field
 from typing import List, Optional
 

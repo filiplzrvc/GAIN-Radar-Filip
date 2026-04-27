@@ -1,6 +1,5 @@
 """
-Kontextaufbereitungs-Agent (Phase 3).
-PDF-Referenz: Kap. 5.5 - Kontextaufbereitungs-Agent
+Kontextaufbereitungs-Agent 
 
 Aufgabe:
 - Bekommt die retrievten Dokumente
@@ -15,7 +14,7 @@ from app.workflow.state import WorkflowState
 
 
 # Schwellwerte für Qualitätsbewertung
-MIN_CHUNK_LENGTH = 50          # Chunks unter 50 Zeichen sind meist Müll
+MIN_CHUNK_LENGTH = 50          # Chunks unter 50 Zeichen sind nicht gebrauchbar
 MIN_DOCS_FOR_GOOD_CONTEXT = 3  # Mind. 3 Dokumente für "gute" Qualität
 MIN_TOTAL_CONTEXT_LENGTH = 500 # Gesamttext mind. 500 Zeichen
 
@@ -35,16 +34,16 @@ def prepare_context(state: WorkflowState) -> WorkflowState:
     if state.decisions.off_topic or state.decisions.clarification_needed:
         state.log("ContextAgent", "Übersprungen: nicht anwendbar")
         state.context_quality = "none"
-        state.decisions.context_sufficient = False  # explizit setzen!
+        state.decisions.context_sufficient = False  
         return state
     
     docs = state.retrieved_documents
     
-    # === Filter 1: Zu kurze Chunks raus ===
+    # Filter 1: Zu kurze Chunks raus
     filtered = [d for d in docs if len(d.content.strip()) >= MIN_CHUNK_LENGTH]
     removed_short = len(docs) - len(filtered)
     
-    # === Filter 2: Duplikate raus (gleiche Quelle + Seite) ===
+    # Filter 2: Duplikate raus (gleiche Quelle + Seite)
     seen = set()
     deduplicated = []
     for d in filtered:
@@ -54,7 +53,7 @@ def prepare_context(state: WorkflowState) -> WorkflowState:
             deduplicated.append(d)
     removed_dupes = len(filtered) - len(deduplicated)
     
-    # === Qualitätsbewertung ===
+    # Qualitätsbewertung
     total_length = sum(len(d.content) for d in deduplicated)
     
     if len(deduplicated) == 0:
@@ -70,7 +69,7 @@ def prepare_context(state: WorkflowState) -> WorkflowState:
         reason = f"{len(deduplicated)} Dokumente / {total_length} Zeichen"
         state.decisions.context_sufficient = True
     
-    # === Strukturierten Kontext-Text bauen ===
+    # Strukturierten Kontext-Text bauen
     context_parts = []
     for i, doc in enumerate(deduplicated, 1):
         # Klare Trennung mit Quellenangabe für das LLM
@@ -79,7 +78,7 @@ def prepare_context(state: WorkflowState) -> WorkflowState:
     
     prepared_context = "\n\n---\n\n".join(context_parts)
     
-    # === State aktualisieren ===
+    # State aktualisieren
     state.prepared_context = prepared_context
     state.context_quality = quality
     state.retrieved_documents = deduplicated  # gefilterte Liste zurückschreiben

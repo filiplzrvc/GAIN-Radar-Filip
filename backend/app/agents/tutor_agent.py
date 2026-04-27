@@ -1,4 +1,4 @@
-"""Tutor-Agent (vorerst monolithisch - wird in Phase 5 durch Orchestrator ersetzt)."""
+#Tutor-Agent 
 import os
 from dotenv import load_dotenv
 from langchain_openai import ChatOpenAI

@@ -1,4 +1,4 @@
-"""FastAPI-Hauptanwendung des GAIN-Radar Backends."""
+#FastAPI-Hauptanwendung des GAIN-Radar Backends.
 import json
 from pathlib import Path
 
@@ -26,7 +26,7 @@ app.add_middleware(
 
 
 def load_courses() -> list[dict]:
-    """Lädt config/courses.json."""
+    #Lädt config/courses.json
     config_path = Path(__file__).parent / "config" / "courses.json"
     with open(config_path, "r", encoding="utf-8") as f:
         return json.load(f)["courses"]
@@ -34,7 +34,7 @@ def load_courses() -> list[dict]:
 
 @app.get("/api/courses", response_model=CoursesResponse)
 async def get_courses():
-    """Gibt eine Liste aller verfügbaren Fächer zurück."""
+    #Gibt eine Liste aller verfügbaren Fächer zurück.
     try:
         courses_data = load_courses()
         courses = [CourseInfo(**c) for c in courses_data]
@@ -47,7 +47,7 @@ async def get_courses():
 
 @app.post("/api/chat", response_model=ChatResponse)
 async def chat_endpoint(request: ChatRequest):
-    """Verarbeitet eine Chat-Anfrage."""
+    #Verarbeitet eine Chat-Anfrage
     valid_codes = [c["code"] for c in load_courses()]
     if request.course not in valid_codes:
         raise HTTPException(
@@ -65,7 +65,7 @@ async def chat_endpoint(request: ChatRequest):
             session_id=request.session_id
         )
     except Exception as e:
-        print(f"❌ Fehler in /api/chat: {e}")
+        print(f" Fehler in /api/chat: {e}")
         raise HTTPException(status_code=500, detail=str(e))
 
 

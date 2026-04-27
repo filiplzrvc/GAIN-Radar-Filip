@@ -72,11 +72,11 @@ def run_analysis_agent(state: WorkflowState) -> WorkflowState:
         
         if state.decisions.off_topic:
             state.log("AnfrageanalyseAgent", 
-                      f"⚠️ OFF-TOPIC erkannt. Grund: {result.get('reasoning', 'keine Begründung')}")
+                      f"OFF-TOPIC erkannt. Grund: {result.get('reasoning', 'keine Begründung')}")
         
         if state.decisions.clarification_needed:
             state.log("AnfrageanalyseAgent",
-                      f"⚠️ Anfrage zu unklar, Rückfrage nötig. Grund: {result.get('reasoning', '')}")
+                      f"Anfrage zu unklar, Rückfrage nötig. Grund: {result.get('reasoning', '')}")
     
     except json.JSONDecodeError as e:
         # Falls das LLM kein gültiges JSON zurückgibt → defensiv fallbacken

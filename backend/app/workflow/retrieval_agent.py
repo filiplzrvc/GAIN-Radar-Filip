@@ -1,6 +1,5 @@
 """
-Retrieval-Agent (Phase 3).
-PDF-Referenz: Kap. 5.4 - Retrieval-Agent
+Retrieval-Agent 
 
 Aufgabe:
 - Bekommt den State mit der Nutzerfrage und dem Fach-Code
@@ -23,7 +22,7 @@ def retrieve_documents(state: WorkflowState) -> WorkflowState:
         Aktualisierter State mit retrieved_documents
     """
     
-    # Defensive Checks: Gibt es überhaupt was zu retrieven?
+    # Defensive Checks
     if state.decisions.off_topic:
         state.log("RetrievalAgent", "Übersprungen: Frage ist off-topic")
         return state
@@ -37,7 +36,7 @@ def retrieve_documents(state: WorkflowState) -> WorkflowState:
         return state
     
     try:
-        # Retriever für das richtige Fach holen (Namespace-Filter wirkt hier!)
+        # Retriever für das richtige Fach holen 
         retriever = get_context_retriever(course_code=state.course)
         
         # Suche durchführen

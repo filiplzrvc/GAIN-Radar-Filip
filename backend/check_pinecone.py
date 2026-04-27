@@ -1,7 +1,7 @@
 # backend/check_pinecone.py
-"""
-Inventur des Pinecone-Index mit echtem Embedding.
-"""
+
+#Inventur des Pinecone-Index mit echtem Embedding.
+
 import os
 from collections import Counter
 from dotenv import load_dotenv
@@ -11,7 +11,7 @@ from langchain_community.embeddings import JinaEmbeddings
 load_dotenv()
 
 # Echtes Embedding einer typischen Frage erstellen
-print("🔧 Erstelle Embedding für Test-Query...")
+print("Erstelle Embedding für Test-Query...")
 embeddings = JinaEmbeddings(
     jina_api_key=os.getenv("JINA_API_KEY"),
     model_name="jina-embeddings-v2-base-de"
@@ -24,7 +24,7 @@ index = pc.Index(os.getenv("PINECONE_INDEX_NAME"))
 
 # 1. Statistiken
 print("\n" + "=" * 60)
-print("📊 INDEX-STATISTIKEN")
+print("INDEX-STATISTIKEN")
 print("=" * 60)
 stats = index.describe_index_stats()
 print(f"Dimension:         {stats.get('dimension')}")
@@ -32,7 +32,7 @@ print(f"Total Vektoren:    {stats.get('total_vector_count')}")
 
 # 2. Echte Suche mit dem Embedding
 print("\n" + "=" * 60)
-print("📁 ECHTE SUCHE: 'Was ist Machine Learning?'")
+print("ECHTE SUCHE: 'Was ist Machine Learning?'")
 print("=" * 60)
 results = index.query(
     vector=query_vector,
@@ -55,7 +55,7 @@ for i, match in enumerate(results.get('matches', []), 1):
                 value_str = value_str[:100] + "..."
             print(f"  {key}: {value_str}")
     else:
-        print("  ⚠️ KEINE Metadaten!")
+        print("KEINE Metadaten!")
     print()
 
 # 3. Alle vorkommenden Metadaten-Felder zählen
@@ -68,7 +68,7 @@ for match in results.get('matches', []):
     sources[src] += 1
 
 print("=" * 60)
-print("📋 ZUSAMMENFASSUNG")
+print("ZUSAMMENFASSUNG")
 print("=" * 60)
 print(f"Vorhandene Metadaten-Felder: {sorted(all_keys)}")
 print(f"\nQuellen-Verteilung:")

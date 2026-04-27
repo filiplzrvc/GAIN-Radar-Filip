@@ -25,5 +25,5 @@ state.retrieved_documents.append(
 
 # Finales Ergebnis anzeigen
 import json
-print("\n📦 Finaler State als JSON:\n")
+print("\n Finaler State als JSON:\n")
 print(json.dumps(state.to_dict(), indent=2, ensure_ascii=False))

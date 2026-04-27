@@ -4,8 +4,6 @@ WorkflowState - Der "Rucksack" des agentischen Workflows.
 Dieses Objekt wird durch ALLE Agenten gereicht und sammelt auf dem Weg
 alle Informationen: Nutzerfrage, erkannter Modus, geholte Dokumente,
 Entscheidungen der Agenten, finale Antwort, etc.
-
-Siehe PDF Kapitel 9 "Zustandsverwaltung" und Kapitel 10 "Session-Konzept".
 """
 
 from dataclasses import dataclass, field
@@ -50,33 +48,33 @@ class WorkflowState:
     7. Session-Memory-Agent speichert alles
     """
     
-    # === 1. EINGABE (kommt vom Frontend) ===
+    # 1. EINGABE 
     user_question: str                                       # Die Frage des Studierenden
     course: str = ""                                         # Fach-Code (z.B. "aief", "itsec", "swen")
     mode: str = "tutor"                                      # tutor, quiz, flashcards, summary
     session_id: str = field(default_factory=lambda: f"sess_{uuid.uuid4().hex[:8]}")
     timestamp: str = field(default_factory=lambda: datetime.utcnow().isoformat() + "Z")
     
-    # === 2. ANFRAGEANALYSE (wird vom Anfrageanalyse-Agent gefüllt) ===
+    # 2. ANFRAGEANALYSE 
     language: Optional[str] = None                           # "de", "en", ...
     topics: list[str] = field(default_factory=list)          # ["Machine Learning", "Overfitting"]
     intent: Optional[str] = None                             # "definition", "explanation", ...
     
-    # === 3. RETRIEVAL (wird vom Retrieval-Agent gefüllt) ===
+    # 3. RETRIEVAL 
     retrieved_documents: list[RetrievedDocument] = field(default_factory=list)
     
-    # === 4. KONTEXTAUFBEREITUNG (wird vom Kontextaufbereitungs-Agent gefüllt) ===
+    # 4. KONTEXTAUFBEREITUNG 
     prepared_context: Optional[str] = None                   # Zusammengeführter, gefilterter Kontext
     context_quality: str = "unknown"                         # "sufficient", "insufficient", "none"
     
-    # === 5. ENTSCHEIDUNGEN (werden von verschiedenen Agenten gefüllt) ===
+    # 5. ENTSCHEIDUNGEN (werden von verschiedenen Agenten gefüllt) 
     decisions: AgentDecisions = field(default_factory=AgentDecisions)
     
-    # === 6. FINALE ANTWORT (wird vom Antwort-Agent gefüllt) ===
+    # 6. FINALE ANTWORT 
     final_answer: Optional[str] = None
     sources_used: list[str] = field(default_factory=list)    # Formatierte Quellen-Strings
     
-    # === 7. DEBUG / LOGGING ===
+    # 7. DEBUG / LOGGING
     # Jeder Agent kann hier reinschreiben, was er gemacht hat - für Nachvollziehbarkeit
     trace: list[str] = field(default_factory=list)
     

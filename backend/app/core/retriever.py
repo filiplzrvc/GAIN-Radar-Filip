@@ -1,6 +1,5 @@
-"""
-Retriever - holt Dokumente aus Pinecone mit Namespace-Support.
-"""
+#Retriever - holt Dokumente aus Pinecone mit Namespace
+
 import os
 from functools import lru_cache
 from langchain_community.embeddings import JinaEmbeddings
@@ -12,8 +11,8 @@ RETRIEVAL_TOP_K = 5
 
 @lru_cache(maxsize=1)
 def _get_embeddings():
-    """Embeddings-Instanz wird nur einmal erstellt (gecached)."""
-    print("🔧 Initialisiere Jina Embeddings (einmalig)...")
+    #Embeddings-Instanz wird nur einmal erstellt 
+    print("Initialisiere Jina Embeddings...")
     return JinaEmbeddings(
         jina_api_key=os.getenv("JINA_API_KEY"),
         model_name=EMBEDDING_MODEL
@@ -22,8 +21,8 @@ def _get_embeddings():
 
 @lru_cache(maxsize=10)
 def _get_vectorstore_for_namespace(namespace: str):
-    """VectorStore pro Namespace gecached."""
-    print(f"🔧 Initialisiere VectorStore für Namespace '{namespace}' (einmalig)...")
+    #VectorStore pro Namespace gecached.
+    print(f"Initialisiere VectorStore für Namespace '{namespace}'...")
     return PineconeVectorStore(
         index_name=os.getenv("PINECONE_INDEX_NAME"),
         embedding=_get_embeddings(),
