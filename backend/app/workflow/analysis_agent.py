@@ -1,5 +1,5 @@
 """
-Anfrageanalyse-Agent (PDF Kapitel 5.3)
+Anfrageanalyse-Agent
 
 Analysiert eine eingehende Nutzerfrage und füllt im WorkflowState:
 - language: Erkannte Sprache
@@ -8,7 +8,7 @@ Analysiert eine eingehende Nutzerfrage und füllt im WorkflowState:
 - decisions.off_topic: Ist die Frage themenfremd?
 - decisions.clarification_needed: Muss nachgefragt werden?
 
-ERLAUBTE AKTIONEN (PDF Kap. 5.9):
+ERLAUBTE AKTIONEN:
 - Sprache, Themen, Intent klassifizieren
 - Off-Topic-Entscheidung treffen
 
@@ -81,14 +81,14 @@ def run_analysis_agent(state: WorkflowState) -> WorkflowState:
     except json.JSONDecodeError as e:
         # Falls das LLM kein gültiges JSON zurückgibt → defensiv fallbacken
         state.log("AnfrageanalyseAgent", 
-                  f"❌ JSON-Parse-Fehler: {e}. Rohausgabe: {raw_response[:200]}")
+                  f"JSON-Parse-Fehler: {e}. Rohausgabe: {raw_response[:200]}")
         # Fallback: Annehmen, dass es eine normale, topic-relevante Frage ist
         state.language = "de"
         state.decisions.off_topic = False
         state.decisions.clarification_needed = False
     
     except Exception as e:
-        state.log("AnfrageanalyseAgent", f"❌ Unerwarteter Fehler: {e}")
+        state.log("AnfrageanalyseAgent", f"Unerwarteter Fehler: {e}")
         # Defensives Fallback - lieber weitermachen als abbrechen
         state.language = "de"
     

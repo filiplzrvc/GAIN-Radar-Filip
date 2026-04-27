@@ -1,8 +1,6 @@
 from langchain_core.prompts import ChatPromptTemplate
 
-# ============================================================
-# TUTOR PROMPT (Quick Fix - strikte RAG-Treue)
-# ============================================================
+# TUTOR PROMPT 
 
 TUTOR_SYSTEM_PROMPT = """LANGUAGE RULE: Always respond in the SAME LANGUAGE as the user's last message.
 If the user writes English, you MUST answer in English. If the user writes German, you MUST answer in German.
@@ -43,9 +41,7 @@ tutor_prompt = ChatPromptTemplate.from_messages([
 ])
 
 
-# ============================================================
-# ANFRAGEANALYSE PROMPT (Phase 2 - unverändert)
-# ============================================================
+# ANFRAGEANALYSE PROMPT
 
 ANALYSIS_SYSTEM_PROMPT = """Du bist der Anfrageanalyse-Agent im GAIN-Radar Lernassistenzsystem.
 
@@ -90,9 +86,8 @@ analysis_prompt = ChatPromptTemplate.from_messages([
 ])
 
 
-# ============================================================
-# ANTWORT-AGENT PROMPT (NEU - Phase 4)
-# ============================================================
+
+# ANTWORT-AGENT PROMPT
 
 ANSWER_SYSTEM_PROMPT = """LANGUAGE RULE: Always respond in the SAME LANGUAGE as the user's question.
 If the user writes English, you MUST answer in English.
