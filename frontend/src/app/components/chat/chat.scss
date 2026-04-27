@@ -35,13 +35,28 @@
     }
   }
 
-  .modes-menu {
+  .courses-menu {
     h3 {
       font-size: 0.8rem;
       text-transform: uppercase;
       color: #666;
       margin-bottom: 15px;
       letter-spacing: 1px;
+    }
+
+    .loading-hint,
+    .error-hint {
+      font-size: 0.85rem;
+      color: #888;
+      padding: 10px 15px;
+      font-style: italic;
+    }
+
+    .error-hint {
+      color: #ff6b6b;
+      background-color: rgba(255, 107, 107, 0.1);
+      border-radius: 8px;
+      border: 1px solid rgba(255, 107, 107, 0.3);
     }
 
     button {
@@ -161,5 +176,34 @@
       &:hover:not(:disabled) { background-color: #3b8bb8; }
       &:disabled { background-color: #333; color: #888; cursor: not-allowed; }
     }
+  }
+}
+
+/* === Empty State im Chat === */
+.empty-state {
+  text-align: center;
+  padding: 60px 20px;
+  color: #888;
+
+  p {
+    font-size: 1.1rem;
+    margin-bottom: 10px;
+    color: #b0b0c0;
+  }
+
+  small {
+    display: block;
+    max-width: 500px;
+    margin: 0 auto;
+    color: #666;
+    line-height: 1.6;
+  }
+}
+
+/* === Course-Meta im Header === */
+.chat-header {
+  .course-meta {
+    color: #888;
+    font-size: 0.8rem;
   }
 }

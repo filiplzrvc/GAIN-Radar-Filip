@@ -1,35 +1,64 @@
 <div class="app-layout">
-  
+
   <aside class="sidebar">
     <div class="brand">
       <h1>GAIN-Radar</h1>
-      <span class="subtitle"></span>
+      <span class="subtitle">FH Technikum Wien</span>
     </div>
 
-    <div class="modes-menu">
-      <h3>Lernmodi</h3>
-      <button [class.active]="selectedMode === 'tutor'" (click)="setMode('tutor')">🎓 Tutor-Modus</button>
-      <button [class.active]="selectedMode === 'quiz'" (click)="setMode('quiz')">❓ Quiz-Modus</button>
-      <button [class.active]="selectedMode === 'flashcards'" (click)="setMode('flashcards')">🃏 Lernkarten</button>
-      <button [class.active]="selectedMode === 'summary'" (click)="setMode('summary')">📝 Zusammenfassung</button>
+    <div class="courses-menu">
+      <h3>Fächer</h3>
+
+      <!-- Loading-State -->
+      <div *ngIf="courses.length === 0 && !coursesError" class="loading-hint">
+        Lade Fächer...
+      </div>
+
+      <!-- Fehler-State -->
+      <div *ngIf="coursesError" class="error-hint">
+        {{ coursesError }}
+      </div>
+
+      <!-- Fächer-Buttons -->
+      <button
+        *ngFor="let course of courses"
+        [class.active]="selectedCourse?.code === course.code"
+        (click)="selectCourse(course)"
+        [title]="course.description">
+        {{ course.name }}
+      </button>
     </div>
   </aside>
 
   <main class="chat-container">
     <header class="chat-header">
-      <h2>{{ getModeName() }}</h2>
-      <span class="status"></span>
+      <div>
+        <h2>{{ selectedCourse?.name || 'Kein Fach gewählt' }}</h2>
+        <small *ngIf="selectedCourse" class="course-meta">
+          Sprache: {{ selectedCourse.language === 'de' ? 'Deutsch' : 'English' }}
+        </small>
+      </div>
+      <span class="status">Online</span>
     </header>
 
     <div class="chat-window">
+      <!-- Empty-State: keine Nachrichten -->
+      <div *ngIf="messages.length === 0 && selectedCourse" class="empty-state">
+        <p>Stelle eine Frage zu <strong>{{ selectedCourse.name }}</strong>.</p>
+        <small>{{ selectedCourse.description }}</small>
+      </div>
+
+      <!-- Nachrichten -->
       <div *ngFor="let msg of messages" class="message" [ngClass]="msg.sender">
         <div class="bubble">
           <p>{{ msg.text }}</p>
           <small *ngIf="msg.sources && msg.sources.length > 0">
-            Quelle: {{ msg.sources.join(', ') }}
+            <strong>Quellen:</strong> {{ msg.sources.join(', ') }}
           </small>
         </div>
       </div>
+
+      <!-- Loading-Indicator -->
       <div *ngIf="isLoading" class="message bot">
         <div class="bubble typing">Agent überlegt...</div>
       </div>
@@ -37,8 +66,16 @@
 
     <div class="input-area">
       <div class="input-wrapper">
-        <input [(ngModel)]="userInput" (keyup.enter)="sendMessage()" placeholder="Schreibe eine Nachricht im {{ getModeName() }}...">
-        <button (click)="sendMessage()" [disabled]="isLoading">Senden</button>
+        <input
+          [(ngModel)]="userInput"
+          (keyup.enter)="sendMessage()"
+          [disabled]="!selectedCourse"
+          [placeholder]="selectedCourse 
+            ? 'Schreibe eine Frage zu ' + selectedCourse.name + '...'
+            : 'Wähle zuerst ein Fach aus...'">
+        <button (click)="sendMessage()" [disabled]="isLoading || !selectedCourse">
+          Senden
+        </button>
       </div>
     </div>
   </main>
