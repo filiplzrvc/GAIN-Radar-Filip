@@ -1,0 +1,25 @@
+{
+  "session_id": "sess_06816d7e",
+  "created_at": "2026-05-10T18:45:41.086647Z",
+  "course": "itsec",
+  "messages": [
+    {
+      "role": "user",
+      "text": "What is asymmetric encryption?",
+      "timestamp": "2026-05-10T18:45:41.086647Z"
+    },
+    {
+      "role": "bot",
+      "text": "Asymmetric encryption, also known as public-private key encryption, uses two different keys for encryption and decryption. The public key is used for encryption, while the private key is used for decryption. This method allows secure communication, as the public key can be shared openly, while the private key remains confidential. Common methods of asymmetric encryption include RSA, Elgamal, and Elliptic Curve Cryptography. Would you like to know more about a specific method?",
+      "sources": [
+        "02_Cryptography.pdf (S. 16)",
+        "02_Cryptography.pdf (S. 21)",
+        "02_Cryptography.pdf (S. 22)",
+        "02_Cryptography.pdf (S. 23)",
+        "02_Cryptography.pdf (S. 29)"
+      ],
+      "timestamp": "2026-05-10T18:45:41.086647Z"
+    }
+  ],
+  "last_updated": "2026-05-10T18:45:41.086647Z"
+}

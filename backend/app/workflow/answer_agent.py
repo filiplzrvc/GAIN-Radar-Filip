@@ -1,5 +1,5 @@
 """
-Antwort-Agent 
+Antwort-Agent
 
 Aufgabe:
 - Bekommt einen vollständig analysierten und vorbereiteten WorkflowState
@@ -11,17 +11,21 @@ Aufgabe:
     5. context sufficient  → Normale LLM-Antwort
 
 - Schreibt final_answer und sources_used in den State
+- Unterstützt beliebige Sprachen via LLM-Übersetzung
 """
 from langchain_openai import ChatOpenAI
 from langchain_core.output_parsers import StrOutputParser
-from app.core.prompts import answer_prompt
+from langchain_core.prompts import ChatPromptTemplate
+from app.core.prompts import ANSWER_SYSTEM_PROMPT
 from app.workflow.state import WorkflowState
 
 
 answer_llm = ChatOpenAI(model="gpt-4o-mini", temperature=0.1)
 
 
-# Deterministische Antworten (kein LLM nötig)
+
+# DETERMINISTISCHE ANTWORTEN (kein LLM nötig)
+# DE + EN vordefiniert, andere Sprachen via _translate()
 
 OFF_TOPIC_RESPONSES = {
     "de": (
@@ -58,15 +62,63 @@ NO_CONTEXT_RESPONSES = {
     ),
 }
 
+# Basis-Text für "passt nicht"-Übersetzung (immer Deutsch als Quelle)
+_NO_MATCH_BASE_DE = (
+    "Im verfügbaren Kursmaterial finde ich zu deiner Frage keine direkt passenden "
+    "Informationen. Möchtest du die Frage in einem anderen Fach stellen oder "
+    "dein Thema präzisieren?"
+)
+
+
+
+# HILFSFUNKTIONEN
 
 def _get_response(responses: dict, language: str) -> str:
-    """Wählt die Antwort in der passenden Sprache mit DE als Fallback."""
-    return responses.get(language, responses["de"])
+    """
+    Wählt die Antwort in der passenden Sprache.
+    DE/EN sind vordefiniert, andere Sprachen fallen auf EN zurück.
+    Für vollständige Mehrsprachigkeit: _translate() nutzen.
+    """
+    return responses.get(language, responses.get("en", responses["de"]))
+
+
+def _translate(text: str, target_language: str) -> str:
+    """
+    Übersetzt einen fixen Text in eine beliebige Zielsprache via LLM.
+    Funktioniert für ALLE Sprachen (Serbisch, Chinesisch, Russisch, Türkisch, etc.)
+    
+    Bei Deutsch: direkte Rückgabe ohne LLM-Call.
+    Bei Fehler: englischer Fallback.
+    """
+    if target_language == "de":
+        return text  # Kein LLM-Call nötig
+    
+    try:
+        translate_prompt = ChatPromptTemplate.from_messages([
+            ("system",
+             "You are a translator. Translate the given text into the target language. "
+             "Output ONLY the translation, nothing else. No explanations, no comments."),
+            ("human",
+             f"Translate to language code '{target_language}':\n\n{{text}}")
+        ])
+        
+        translate_chain = translate_prompt | answer_llm | StrOutputParser()
+        translated = translate_chain.invoke({"text": text})
+        return translated.strip()
+    
+    except Exception:
+        # Fallback: englische Version
+        return (
+            "I couldn't find directly relevant information about your question "
+            "in the available course material. Would you like to ask your question "
+            "in a different subject or refine your topic?"
+        )
 
 
 def _format_history_for_prompt(history: list[dict]) -> str:
     """
     Formatiert den Konversations-Verlauf als String für das LLM.
+    
     Beispiel-Output:
         Bisheriger Gesprächsverlauf:
         User: Was ist Overfitting?
@@ -85,34 +137,6 @@ def _format_history_for_prompt(history: list[dict]) -> str:
     return "\n".join(lines)
 
 
-def _generate_llm_answer(state: WorkflowState, with_warning: bool = False) -> str:
-    """Ruft das LLM auf, um eine Antwort aus dem prepared_context zu erzeugen."""
-    chain = answer_prompt | answer_llm | StrOutputParser()
-    
-    # Konversations-Verlauf in den Frage-Block einfügen
-    user_input_parts = []
-    
-    history_text = _format_history_for_prompt(state.conversation_history)
-    if history_text:
-        user_input_parts.append(history_text)
-        user_input_parts.append("")  # Leerzeile zur Trennung
-    
-    if with_warning:
-        user_input_parts.append(
-            "[Hinweis: Der Kontext könnte unzureichend sein. "
-            "Antworte nur, was wirklich belegbar ist, sonst sage es ehrlich.]"
-        )
-        user_input_parts.append("")
-    
-    user_input_parts.append(f"Aktuelle Frage: {state.user_question}")
-    
-    full_user_input = "\n".join(user_input_parts)
-    
-    return chain.invoke({
-        "context": state.prepared_context or "",
-        "user_input": full_user_input
-    })
-
 def _format_sources(state: WorkflowState) -> list[str]:
     """Erstellt die Quellen-Liste aus den retrievten Dokumenten."""
     sources = set()
@@ -121,50 +145,174 @@ def _format_sources(state: WorkflowState) -> list[str]:
     return sorted(list(sources))
 
 
+def _has_no_match(answer: str) -> bool:
+    """
+    Prüft, ob die LLM-Antwort signalisiert, dass das Material nicht passt.
+    Erkennt sowohl deutsche als auch englische Formulierungen.
+    """
+    if not answer:
+        return False
+    
+    answer_lower = answer.lower()
+    
+    signals = [
+        # Deutsch
+        "finde ich zu deiner frage keine",
+        "finde ich dazu keine",
+        "keine direkt passenden informationen",
+        "keine ausreichenden informationen",
+        "nicht im kursmaterial",
+        "im verfügbaren kursmaterial finde ich",
+        # Englisch
+        "i couldn't find",
+        "i could not find",
+        "i do not find",
+        "no information about",
+        "not covered in",
+        "no directly relevant information",
+        "do not find directly relevant",
+        "cannot find any information",
+        "in the available course material, i do not find",
+    ]
+    
+    return any(signal in answer_lower for signal in signals)
+
+
+def _generate_llm_answer(state: WorkflowState, with_warning: bool = False) -> str:
+    """
+    Ruft das LLM auf, um eine Antwort aus dem prepared_context zu erzeugen.
+    
+    Baut einen dynamischen System-Prompt mit der erkannten Sprache,
+    und fügt den Konversations-Verlauf in den User-Input ein.
+    """
+    # Sprache dynamisch bestimmen
+    language = state.language or "de"
+    language_map = {"de": "German", "en": "English"}
+    language_name = language_map.get(language, f"the language with ISO code '{language}'")
+    
+    # Dynamischen System-Prompt mit Sprach-Regel bauen
+    dynamic_system = (
+        f"CRITICAL LANGUAGE RULE: You MUST respond ONLY in {language_name}. "
+        f"This is non-negotiable. Do NOT respond in any other language.\n\n"
+        + ANSWER_SYSTEM_PROMPT
+    )
+    
+    dynamic_prompt = ChatPromptTemplate.from_messages([
+        ("system", dynamic_system),
+        ("human", "{user_input}")
+    ])
+    
+    chain = dynamic_prompt | answer_llm | StrOutputParser()
+    
+    # User-Input zusammenbauen 
+    user_input_parts = []
+    
+    # Konversations-Verlauf einfügen falls vorhanden
+    history_text = _format_history_for_prompt(state.conversation_history)
+    if history_text:
+        user_input_parts.append(history_text)
+        user_input_parts.append("")
+    
+    # Warnung bei insufficient Kontext
+    if with_warning:
+        user_input_parts.append(
+            "[Hinweis: Der Kontext könnte unzureichend sein. "
+            "Antworte nur, was wirklich belegbar ist, sonst sage es ehrlich.]"
+        )
+        user_input_parts.append("")
+    
+    # Aktuelle Frage mit Sprach-Erinnerung
+    user_input_parts.append(
+        f"Aktuelle Frage ({language_name} only!): {state.user_question}"
+    )
+    user_input_parts.append(
+        f"[REMINDER: Your entire response MUST be in {language_name}. {language_name} only.]"
+    )
+    
+    full_user_input = "\n".join(user_input_parts)
+    
+    return chain.invoke({
+        "context": state.prepared_context or "",
+        "user_input": full_user_input
+    })
+
+
+def _handle_llm_answer(state: WorkflowState, with_warning: bool = False) -> None:
+    """
+    Generiert eine LLM-Antwort, prüft ob sie "passt nicht" bedeutet,
+    und setzt final_answer + sources_used entsprechend.
+    
+    Bei "passt nicht": übersetzt die fixe Nachricht in die User-Sprache.
+    Bei echter Antwort: Quellen werden angezeigt.
+    """
+    language = state.language or "de"
+    
+    llm_answer = _generate_llm_answer(state, with_warning=with_warning)
+    
+    if _has_no_match(llm_answer):
+        # LLM sagt "passt nicht" → deterministische Antwort in User-Sprache
+        state.final_answer = _translate(_NO_MATCH_BASE_DE, language)
+        state.sources_used = []
+        state.log("AntwortAgent", "Keine Quellen — 'passt nicht', Antwort übersetzt")
+    else:
+        # Echte Antwort aus dem Material
+        state.final_answer = llm_answer
+        state.sources_used = _format_sources(state)
+
+
+
+# HAUPT-FUNKTION
+
 def run_answer_agent(state: WorkflowState) -> WorkflowState:
     """
     Wählt die passende Antwortstrategie und füllt final_answer + sources_used.
+    
+    5 Strategien:
+    1. Off-Topic    → deterministische Ablehnung (kein LLM)
+    2. Clarification → deterministische Rückfrage (kein LLM)
+    3. No Context   → deterministische "nichts gefunden" (kein LLM)
+    4. Insufficient → LLM mit Vorsicht-Warnung
+    5. Sufficient   → normale RAG-Antwort
     """
     state.log("AntwortAgent", "Wähle Antwortstrategie...")
+    language = state.language or "de"
     
     # STRATEGIE 1: Off-Topic
     if state.decisions.off_topic:
-        state.final_answer = _get_response(OFF_TOPIC_RESPONSES, state.language or "de")
+        state.final_answer = _get_response(OFF_TOPIC_RESPONSES, language)
         state.sources_used = []
         state.log("AntwortAgent", "Strategie: Off-Topic-Ablehnung (kein LLM)")
         return state
     
-    # STRATEGIE 2: Klärung nötig 
+    # STRATEGIE 2: Klärung nötig
     if state.decisions.clarification_needed:
-        state.final_answer = _get_response(CLARIFICATION_RESPONSES, state.language or "de")
+        state.final_answer = _get_response(CLARIFICATION_RESPONSES, language)
         state.sources_used = []
         state.log("AntwortAgent", "Strategie: Rückfrage (kein LLM)")
         return state
     
-    # STRATEGIE 3: Kein Kontext gefunden 
+    # STRATEGIE 3: Kein Kontext gefunden
     if state.context_quality == "none":
-        state.final_answer = _get_response(NO_CONTEXT_RESPONSES, state.language or "de")
+        state.final_answer = _get_response(NO_CONTEXT_RESPONSES, language)
         state.sources_used = []
         state.log("AntwortAgent", "Strategie: Kein Kontext (kein LLM)")
         return state
     
-    # STRATEGIE 4: Wenig Kontext - LLM mit Warnung
+    # STRATEGIE 4: Wenig Kontext — LLM mit Warnung
     if state.context_quality == "insufficient":
         state.log("AntwortAgent", "Strategie: LLM mit Insufficient-Warnung")
         try:
-            state.final_answer = _generate_llm_answer(state, with_warning=True)
-            state.sources_used = _format_sources(state)
+            _handle_llm_answer(state, with_warning=True)
         except Exception as e:
             state.log("AntwortAgent", f"LLM-Fehler: {e}")
-            state.final_answer = _get_response(NO_CONTEXT_RESPONSES, state.language or "de")
+            state.final_answer = _get_response(NO_CONTEXT_RESPONSES, language)
             state.sources_used = []
         return state
     
-    # STRATEGIE 5: Guter Kontext - normale RAG-Antwort
+    # STRATEGIE 5: Guter Kontext — normale RAG-Antwort
     state.log("AntwortAgent", "Strategie: Normale RAG-Antwort")
     try:
-        state.final_answer = _generate_llm_answer(state, with_warning=False)
-        state.sources_used = _format_sources(state)
+        _handle_llm_answer(state, with_warning=False)
     except Exception as e:
         state.log("AntwortAgent", f"LLM-Fehler: {e}")
         state.final_answer = (

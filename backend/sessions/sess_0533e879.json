@@ -1,0 +1,24 @@
+{
+  "session_id": "sess_0533e879",
+  "created_at": "2026-05-10T18:47:15.713559Z",
+  "course": "aief",
+  "messages": [
+    {
+      "role": "user",
+      "text": "What is asymmetric encryption?",
+      "timestamp": "2026-05-10T18:47:15.713559Z"
+    },
+    {
+      "role": "bot",
+      "text": "Im verfügbaren Kursmaterial finde ich zu deiner Frage keine direkt passenden Informationen. Im gefundenen Material geht es um maschinelles Lernen, neuronale Netze und unüberwachtes Lernen. Möchtest du die Frage in einem anderen Fach stellen oder dein Thema präzisieren?",
+      "sources": [
+        "03_MaschinellesLernen.pdf (S. 2)",
+        "03_MaschinellesLernen.pdf (S. 28)",
+        "03_MaschinellesLernen.pdf (S. 29)",
+        "04_NeuronaleNetze.pdf (S. 20)"
+      ],
+      "timestamp": "2026-05-10T18:47:15.713559Z"
+    }
+  ],
+  "last_updated": "2026-05-10T18:47:15.713559Z"
+}
