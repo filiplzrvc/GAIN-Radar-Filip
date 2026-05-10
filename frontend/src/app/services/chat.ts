@@ -49,8 +49,16 @@ export class ChatService {
    * Schickt eine Chat-Anfrage ans Backend.
    * Course ist jetzt PFLICHTFELD - Backend lehnt ohne ab!
    */
-  sendMessage(text: string, course: string, mode: string = 'tutor'): Observable<ChatResponse> {
+  sendMessage(
+    text: string,
+    course: string,
+    mode: string = 'tutor',
+    sessionId: string | null = null,
+  ): Observable<ChatResponse> {
     const payload: ChatRequest = { text, course, mode };
+    if (sessionId) {
+      payload.session_id = sessionId;
+    }
     return this.http.post<ChatResponse>(`${this.baseUrl}/chat`, payload);
   }
 }

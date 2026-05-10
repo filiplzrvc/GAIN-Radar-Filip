@@ -29,9 +29,18 @@ def retrieve_documents(state: WorkflowState) -> WorkflowState:
         # Retriever für das richtige Fach holen 
         retriever = get_context_retriever(course_code=state.course)
         
+        # Such-Query bauen: bei Folgefragen die Topics aus der Anfrageanalyse
+        # mit der Original-Frage kombinieren, damit Pinecone den richtigen Kontext findet.
+        # Beispiel: "Gib mir ein Beispiel" + Topics ["Overfitting"] 
+        #        → "Gib mir ein Beispiel Overfitting"
+        if state.conversation_history and state.topics:
+            search_query = state.user_question + " " + " ".join(state.topics)
+            state.log("RetrievalAgent", f"Folgefrage: erweitere Query mit Topics → '{search_query[:80]}'")
+        else:
+            search_query = state.user_question
+        
         # Suche durchführen
-        # Wir nehmen die Original-Frage. Alternative: state.topics als Query.
-        docs = retriever.invoke(state.user_question)
+        docs = retriever.invoke(search_query)
         
         # LangChain-Documents in unsere RetrievedDocument-Struktur konvertieren
         retrieved = []

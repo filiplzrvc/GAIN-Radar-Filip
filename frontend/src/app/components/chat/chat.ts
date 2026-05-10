@@ -11,20 +11,21 @@ import { ChatService, Course } from '../../services/chat';
   styleUrl: './chat.scss',
 })
 export class ChatComponent implements OnInit {
-  // === User-Eingabe ===
+  // User-Eingabe
   userInput: string = '';
   isLoading: boolean = false;
 
-  // === Fächer & Auswahl ===
+  // Fächer & Auswahl
   courses: Course[] = [];
   selectedCourse: Course | null = null;
   coursesError: string = '';
 
-  // === Modi (für später - aktuell nur tutor aktiv) ===
+  // Modi (für später - aktuell nur tutor aktiv)
   selectedMode: string = 'tutor';
 
-  // === Chat-Verlauf ===
+  // Chat-Verlauf + Session
   messages: any[] = [];
+  sessionId: string | null = null; // wird vom Backend mit der ersten Antwort gesetzt
 
   constructor(
     private chatService: ChatService,
@@ -48,7 +49,7 @@ export class ChatComponent implements OnInit {
         if (this.courses.length > 0) {
           this.selectedCourse = this.courses[0];
         }
-        // 🔧 FIX: Change Detection manuell auslösen,
+        // FIX: Change Detection manuell auslösen,
         // weil HTTP-Callback außerhalb der Zone laufen kann
         this.cdr.detectChanges();
       },
@@ -68,6 +69,8 @@ export class ChatComponent implements OnInit {
     if (this.selectedCourse?.code === course.code) return; // gleiche Auswahl
     this.selectedCourse = course;
     this.messages = []; // Chat zurücksetzen beim Fach-Wechsel
+    // Beim Fach-Wechsel neue Session starten - sonst mischt sich Kontext zwischen Fächern
+    this.sessionId = null;
   }
 
   /**
@@ -86,17 +89,28 @@ export class ChatComponent implements OnInit {
     this.userInput = '';
     this.isLoading = true;
 
+    // User-Nachricht in den Chat aufnehmen
     this.chatService
-      .sendMessage(currentInput, this.selectedCourse.code, this.selectedMode)
+      .sendMessage(
+        currentInput,
+        this.selectedCourse.code,
+        this.selectedMode,
+        this.sessionId, // ← Session-ID mitschicken
+      )
       .subscribe({
         next: (res) => {
+          // Session-ID merken (kommt vom Backend - bei erster Frage neu, danach gleich)
+          if (res.session_id) {
+            this.sessionId = res.session_id;
+          }
+
           this.messages.push({
             text: res.reply,
             sender: 'bot',
             sources: res.sources,
           });
           this.isLoading = false;
-          this.cdr.detectChanges(); // 🔧 FIX
+          this.cdr.detectChanges();
         },
         error: (err) => {
           console.error('Fehler:', err);

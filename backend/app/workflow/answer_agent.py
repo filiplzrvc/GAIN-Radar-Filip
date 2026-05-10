@@ -64,24 +64,54 @@ def _get_response(responses: dict, language: str) -> str:
     return responses.get(language, responses["de"])
 
 
+def _format_history_for_prompt(history: list[dict]) -> str:
+    """
+    Formatiert den Konversations-Verlauf als String für das LLM.
+    Beispiel-Output:
+        Bisheriger Gesprächsverlauf:
+        User: Was ist Overfitting?
+        Assistent: Overfitting tritt auf, wenn ein Modell...
+        User: Gib mir ein Beispiel
+    """
+    if not history:
+        return ""
+    
+    lines = ["Bisheriger Gesprächsverlauf:"]
+    for msg in history:
+        role = "User" if msg.get("role") == "user" else "Assistent"
+        text = msg.get("text", "").strip()
+        lines.append(f"{role}: {text}")
+    
+    return "\n".join(lines)
+
+
 def _generate_llm_answer(state: WorkflowState, with_warning: bool = False) -> str:
     """Ruft das LLM auf, um eine Antwort aus dem prepared_context zu erzeugen."""
     chain = answer_prompt | answer_llm | StrOutputParser()
     
-    # Bei "insufficient" Kontext: dem LLM einen Hinweis im Frage-Block mitgeben
-    user_input = state.user_question
+    # Konversations-Verlauf in den Frage-Block einfügen
+    user_input_parts = []
+    
+    history_text = _format_history_for_prompt(state.conversation_history)
+    if history_text:
+        user_input_parts.append(history_text)
+        user_input_parts.append("")  # Leerzeile zur Trennung
+    
     if with_warning:
-        warning = (
+        user_input_parts.append(
             "[Hinweis: Der Kontext könnte unzureichend sein. "
-            "Antworte nur, was wirklich belegbar ist, sonst sage es ehrlich.]\n\n"
+            "Antworte nur, was wirklich belegbar ist, sonst sage es ehrlich.]"
         )
-        user_input = warning + state.user_question
+        user_input_parts.append("")
+    
+    user_input_parts.append(f"Aktuelle Frage: {state.user_question}")
+    
+    full_user_input = "\n".join(user_input_parts)
     
     return chain.invoke({
         "context": state.prepared_context or "",
-        "user_input": user_input
+        "user_input": full_user_input
     })
-
 
 def _format_sources(state: WorkflowState) -> list[str]:
     """Erstellt die Quellen-Liste aus den retrievten Dokumenten."""

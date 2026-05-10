@@ -1,0 +1,41 @@
+{
+  "session_id": "sess_106c1540",
+  "created_at": "2026-05-10T18:33:41.374493Z",
+  "course": "aief",
+  "messages": [
+    {
+      "role": "user",
+      "text": "Was ist Overfitting?",
+      "timestamp": "2026-05-10T18:33:41.374493Z"
+    },
+    {
+      "role": "bot",
+      "text": "Overfitting, oder Überanpassung, ist ein Phänomen im maschinellen Lernen, bei dem ein Modell zu stark an die Trainingsdaten angepasst wird. Dies führt dazu, dass das Modell zwar auf den Trainingsdaten sehr gut funktioniert, jedoch auf neuen, unbekannten Testdaten schlecht abschneidet. \n\nEin Beispiel für Overfitting ist, wenn ein Entscheidungsbaum mehr als 55 Knoten hat. In diesem Fall nimmt die Fehlerrate auf den Trainingsdaten zwar ab, aber die Fehlerrate auf den Testdaten steigt wieder an. Eine mögliche Lösung, um Overfitting zu vermeiden, ist der Abbruch des Lernens bei einer bestimmten Anzahl von Knoten, wie zum Beispiel 55.",
+      "sources": [
+        "03_MaschinellesLernen.pdf (S. 16)",
+        "03_MaschinellesLernen.pdf (S. 22)",
+        "04_NeuronaleNetze.pdf (S. 21)",
+        "04_NeuronaleNetze.pdf (S. 22)"
+      ],
+      "timestamp": "2026-05-10T18:33:41.374493Z"
+    },
+    {
+      "role": "user",
+      "text": "Gib mir ein Beispiel",
+      "timestamp": "2026-05-10T18:34:06.872177Z"
+    },
+    {
+      "role": "bot",
+      "text": "Ein Beispiel für Overfitting ist ein Entscheidungsbaum, der mehr als 55 Knoten hat. In diesem Fall wird der Baum so komplex, dass er die Trainingsdaten sehr gut klassifiziert, aber auf den Testdaten nicht mehr gut abschneidet. Die Fehlerrate auf den Trainingsdaten nimmt zwar ab, jedoch steigt die Fehlerrate auf den Testdaten wieder an, was zeigt, dass das Modell nicht generalisiert. Eine mögliche Lösung, um dieses Problem zu vermeiden, ist der Abbruch des Lernens, bevor der Baum zu viele Knoten hat, beispielsweise bei 55 Knoten. \n\nMöchtest du mehr über mögliche Lösungen für Overfitting erfahren?",
+      "sources": [
+        "03_MaschinellesLernen.pdf (S. 22)",
+        "03_MaschinellesLernen.pdf (S. 29)",
+        "03_MaschinellesLernen.pdf (S. 3)",
+        "03_MaschinellesLernen.pdf (S. 8)",
+        "04_NeuronaleNetze.pdf (S. 21)"
+      ],
+      "timestamp": "2026-05-10T18:34:06.872177Z"
+    }
+  ],
+  "last_updated": "2026-05-10T18:34:06.872177Z"
+}

@@ -52,6 +52,10 @@ class WorkflowState:
     session_id: str = field(default_factory=lambda: f"sess_{uuid.uuid4().hex[:8]}")
     timestamp: str = field(default_factory=lambda: datetime.utcnow().isoformat() + "Z")
     
+    # Liste vergangener Q&A-Paare aus dem Memory Manager geladen
+    # Format: [{"role": "user", "text": "..."}, {"role": "bot", "text": "...", "sources": [...]}]
+    conversation_history: list[dict] = field(default_factory=list)
+    
     # 2. ANFRAGEANALYSE 
     language: Optional[str] = None                           # "de", "en", ...
     topics: list[str] = field(default_factory=list)          # ["Machine Learning", "Overfitting"]
