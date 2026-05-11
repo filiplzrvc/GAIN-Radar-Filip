@@ -33,9 +33,9 @@ class AgentDecisions:
 @dataclass
 class WorkflowState:
     """
-    Der zentrale State, der durch alle Agenten wandert.
+    Der zentrale State, der durch alle Agenten geht.
     
-    Die Reihenfolge der Felder spiegelt den typischen Workflow wider:
+    Die Reihenfolge der Felder spiegelt den typischen Workflow wieder:
     1. Eingabe vom User
     2. Anfrageanalyse-Agent füllt: topics, language, intent
     3. Retrieval-Agent füllt: retrieved_documents
@@ -47,7 +47,7 @@ class WorkflowState:
     
     # 1. EINGABE 
     user_question: str                                       # Die Frage des Studierenden
-    course: str = ""                                         # Fach-Code (z.B. "aief", "itsec", "swen")
+    course: str = ""                                         # Fach (z.B. "aief", "itsec", "swen")
     mode: str = "tutor"                                      # tutor, quiz, flashcards, summary
     session_id: str = field(default_factory=lambda: f"sess_{uuid.uuid4().hex[:8]}")
     timestamp: str = field(default_factory=lambda: datetime.utcnow().isoformat() + "Z")

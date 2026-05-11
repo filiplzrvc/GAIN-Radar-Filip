@@ -53,8 +53,7 @@ def get_history_for_llm(session_id: str) -> list[dict]:
     Lädt nur die letzten N Nachrichten einer Session für das LLM.
     
     User sieht alle Nachrichten, aber das LLM bekommt nur ein Sliding Window
-    der letzten 6 Q&A-Paare (12 Nachrichten). Das hält den Prompt schnell und 
-    günstig, ohne dass der User merkt, dass es ein Limit gibt.
+    der letzten 6 Q&A-Paare (12 Nachrichten). Das hält den Prompt schnell und günstig.
     """
     session = load_session(session_id)
     if not session:

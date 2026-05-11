@@ -1,0 +1,7 @@
+{
+  "permissions": {
+    "allow": [
+      "PowerShell(cd \"c:\\\\Users\\\\filip\\\\Documents\\\\FH-Technikum\\\\4 Semester \\(NEU\\)\\\\InnoLab\\(Filip\\)\\\\Gain-Radar-2-main\\\\backend\"; Get-ChildItem -Recurse -File | Where-Object { $_.FullName -notmatch \"\\\\.venv\" } | Select-Object -ExpandProperty FullName | Sort-Object)"
+    ]
+  }
+}

@@ -9,7 +9,7 @@ Analysiert eine eingehende Nutzerfrage und füllt im WorkflowState:
 ERLAUBTE AKTIONEN
 - Sprache, Themen, Intent klassifizieren
 - Off-Topic-Entscheidung treffen
-- Konversations-Verlauf berücksichtigen für Folgefragen (Phase 6)
+- Konversations-Verlauf berücksichtigen für Folgefragen
 
 NICHT ERLAUBT:
 - Dokumente abrufen (das macht der Retrieval-Agent)
@@ -60,7 +60,7 @@ def run_analysis_agent(state: WorkflowState) -> WorkflowState:
     """
     state.log("AnfrageanalyseAgent", f"Analysiere Frage: '{state.user_question[:60]}...'")
     
-    # Phase 6: Konversations-Verlauf in den User-Input einbauen
+    # Konversations-Verlauf in den User-Input einbauen
     history_text = _format_history_for_analysis(state.conversation_history)
     if history_text:
         full_input = f"{history_text}\n\nAktuelle Frage: {state.user_question}"

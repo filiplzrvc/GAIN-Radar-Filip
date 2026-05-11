@@ -2,7 +2,7 @@
 Retrieval-Agent 
 
 Aufgabe:
-- Bekommt den State mit der Nutzerfrage und dem Fach-Code
+- Bekommt den State mit der Nutzerfrage und dem Fach
 - Holt relevante Dokumente aus Pinecone (über den bestehenden Retriever)
 - Schreibt die gefundenen Dokumente in den State
 - Loggt die Aktion für die Trace
