@@ -1,0 +1,19 @@
+{
+  "session_id": "sess_8c3943b6",
+  "created_at": "2026-05-21T23:03:02.516896Z",
+  "course": "aief",
+  "messages": [
+    {
+      "role": "user",
+      "text": "Wie viele Äpfel gibt es auf der Welt?",
+      "timestamp": "2026-05-21T23:03:02.516896Z"
+    },
+    {
+      "role": "bot",
+      "text": "Diese Frage liegt außerhalb der Studieninhalte. GAIN-Radar hilft dir bei Fragen zu deinen Kursen. Möchtest du etwas zu einem deiner Fächer wissen?",
+      "sources": [],
+      "timestamp": "2026-05-21T23:03:02.516896Z"
+    }
+  ],
+  "last_updated": "2026-05-21T23:03:02.516896Z"
+}

@@ -1,0 +1,25 @@
+{
+  "session_id": "sess_b582036c",
+  "created_at": "2026-05-21T23:38:14.987777Z",
+  "course": "swen",
+  "messages": [
+    {
+      "role": "user",
+      "text": "Erkläre das MVC-Pattern.",
+      "timestamp": "2026-05-21T23:38:14.987777Z"
+    },
+    {
+      "role": "bot",
+      "text": "Das MVC-Pattern (Model-View-Controller) ist ein Architektur-Pattern, das die Struktur von Softwareanwendungen organisiert, um die Trennung von Anliegen zu fördern. Es besteht aus drei Hauptkomponenten:\n\n1. **Model**: Das Model repräsentiert die Daten und die Geschäftslogik der Anwendung. Es ist verantwortlich für die Verwaltung der Daten, die Verarbeitung von Anfragen und die Durchführung von Operationen.\n\n2. **View**: Die View ist die Benutzeroberfläche, die dem Benutzer die Daten präsentiert. Sie zeigt die Informationen an, die vom Model bereitgestellt werden, und ist für die Darstellung der Benutzerinteraktion zuständig.\n\n3. **Controller**: Der Controller fungiert als Vermittler zwischen Model und View. Er empfängt Eingaben vom Benutzer über die View, verarbeitet diese Eingaben (oft durch Interaktion mit dem Model) und aktualisiert die View entsprechend.\n\nDurch die Trennung dieser drei Komponenten ermöglicht das MVC-Pattern eine bessere Wartbarkeit und Testbarkeit der Anwendung, da Änderungen in einer Komponente nicht zwangsläufig die anderen beeinflussen müssen. \n\nMöchtest du mehr über die Implementierung oder die Vorteile des MVC-Patterns erfahren?",
+      "sources": [
+        "06_Architecture.pdf (S. 9)",
+        "07b_OCP.pdf (S. 13)",
+        "07b_OCP.pdf (S. 21)",
+        "15_Repository.pdf (S. 2)",
+        "15_Repository.pdf (S. 8)"
+      ],
+      "timestamp": "2026-05-21T23:38:14.987777Z"
+    }
+  ],
+  "last_updated": "2026-05-21T23:38:14.987777Z"
+}

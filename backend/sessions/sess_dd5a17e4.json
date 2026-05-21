@@ -1,0 +1,19 @@
+{
+  "session_id": "sess_dd5a17e4",
+  "created_at": "2026-05-21T23:39:08.595515Z",
+  "course": "swe",
+  "messages": [
+    {
+      "role": "user",
+      "text": "Was bedeutet Continuous Integration?",
+      "timestamp": "2026-05-21T23:39:08.595515Z"
+    },
+    {
+      "role": "bot",
+      "text": "Im Kursmaterial finde ich zu deiner Frage leider keine Informationen. Vielleicht passt sie nicht zu diesem Fach – möchtest du sie in einem anderen Fach stellen?",
+      "sources": [],
+      "timestamp": "2026-05-21T23:39:08.595515Z"
+    }
+  ],
+  "last_updated": "2026-05-21T23:39:08.595515Z"
+}

@@ -1,0 +1,25 @@
+{
+  "session_id": "test-1234",
+  "created_at": "2026-05-21T23:02:19.817540Z",
+  "course": "aief",
+  "messages": [
+    {
+      "role": "user",
+      "text": "Was ist Machine Learning?",
+      "timestamp": "2026-05-21T23:02:19.817540Z"
+    },
+    {
+      "role": "bot",
+      "text": "Maschinelles Lernen (ML) ist ein Teilgebiet der Künstlichen Intelligenz (KI), das sich mit der Erforschung „intelligenter“ Verfahren beschäftigt, die versuchen, die menschliche Lernfähigkeit zu imitieren. Es geht darum, die Funktionsweise des menschlichen Gehirns zu modellieren und zu verstehen. Maschinelles Lernen zeichnet sich durch seine Adaptivität aus, das heißt, es kann sich durch Lernen an verschiedene Umweltbedingungen anpassen. \n\nEs umfasst verschiedene Formalismen und Vorgehensweisen, darunter überwachte und unüberwachte Lernverfahren sowie Lernen durch Verstärkung. Ein zentrales Ziel von ML ist es, aus Daten zu lernen und Modelle zu erstellen, die Vorhersagen über unbekannte Daten ermöglichen.",
+      "sources": [
+        "01_Grundlagen.pdf (S. 27)",
+        "01_Grundlagen.pdf (S. 5)",
+        "03_MaschinellesLernen.pdf (S. 3)",
+        "03_MaschinellesLernen.pdf (S. 37)",
+        "03_MaschinellesLernen.pdf (S. 4)"
+      ],
+      "timestamp": "2026-05-21T23:02:19.817540Z"
+    }
+  ],
+  "last_updated": "2026-05-21T23:02:19.817540Z"
+}

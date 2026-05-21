@@ -1,0 +1,59 @@
+{
+  "session_id": "test-123",
+  "created_at": "2026-05-21T11:53:58.728714Z",
+  "course": "aief",
+  "messages": [
+    {
+      "role": "user",
+      "text": "Was ist Machine Learning?",
+      "timestamp": "2026-05-21T11:53:58.728714Z"
+    },
+    {
+      "role": "bot",
+      "text": "Maschinelles Lernen (Machine Learning) ist ein Teilgebiet der Künstlichen Intelligenz, das sich mit der Erforschung „intelligenter“ Verfahren beschäftigt, die die menschliche Lernfähigkeit imitieren. Es versucht, die Funktionsweise des menschlichen Gehirns zu modellieren und zu verstehen. Maschinelles Lernen zeichnet sich durch seine Adaptivität aus, das heißt, es kann sich durch Lernen an verschiedene Umweltbedingungen anpassen. \n\nEs umfasst verschiedene Formalismen und Vorgehensweisen, darunter überwachte und unüberwachte Lernverfahren sowie Lernen durch Verstärkung. Ein wichtiges Merkmal ist, dass Softwareprogramme aus Daten lernen und das erlernte Modell verwenden, um Vorhersagen über unbekannte Daten zu erstellen.",
+      "sources": [
+        "01_Grundlagen.pdf (S. 27)",
+        "01_Grundlagen.pdf (S. 5)",
+        "03_MaschinellesLernen.pdf (S. 3)",
+        "03_MaschinellesLernen.pdf (S. 37)",
+        "03_MaschinellesLernen.pdf (S. 4)"
+      ],
+      "timestamp": "2026-05-21T11:53:58.728714Z"
+    },
+    {
+      "role": "user",
+      "text": "Was ist Machine Learning?",
+      "timestamp": "2026-05-21T12:03:08.349843Z"
+    },
+    {
+      "role": "bot",
+      "text": "Im bisherigen Gesprächsverlauf hast du bereits eine Erklärung zu Maschinellem Lernen (Machine Learning) erhalten. Es handelt sich um ein Teilgebiet der Künstlichen Intelligenz, das sich mit der Nachahmung der menschlichen Lernfähigkeit beschäftigt und versucht, die Funktionsweise des menschlichen Gehirns zu modellieren. Maschinelles Lernen zeichnet sich durch seine Adaptivität aus und umfasst verschiedene Verfahren, wie überwachte und unüberwachte Lernmethoden sowie Lernen durch Verstärkung. \n\nWenn du weitere spezifische Fragen hast oder mehr Details zu einem bestimmten Aspekt wünschst, lass es mich wissen!",
+      "sources": [
+        "01_Grundlagen.pdf (S. 27)",
+        "01_Grundlagen.pdf (S. 42)",
+        "01_Grundlagen.pdf (S. 5)",
+        "03_MaschinellesLernen.pdf (S. 3)",
+        "03_MaschinellesLernen.pdf (S. 4)"
+      ],
+      "timestamp": "2026-05-21T12:03:08.349843Z"
+    },
+    {
+      "role": "user",
+      "text": "Was ist Machine Learning?",
+      "timestamp": "2026-05-21T23:01:25.256964Z"
+    },
+    {
+      "role": "bot",
+      "text": "Im bisherigen Gesprächsverlauf hast du bereits eine Erklärung zu Maschinellem Lernen (Machine Learning) erhalten. Es handelt sich um ein Teilgebiet der Künstlichen Intelligenz, das sich mit der Nachahmung der menschlichen Lernfähigkeit beschäftigt und versucht, die Funktionsweise des menschlichen Gehirns zu modellieren. Maschinelles Lernen zeichnet sich durch seine Adaptivität aus und umfasst verschiedene Verfahren, wie überwachte und unüberwachte Lernmethoden sowie Lernen durch Verstärkung.\n\nWenn du weitere spezifische Fragen hast oder mehr Details zu einem bestimmten Aspekt wünschst, lass es mich wissen!",
+      "sources": [
+        "01_Grundlagen.pdf (S. 27)",
+        "01_Grundlagen.pdf (S. 42)",
+        "01_Grundlagen.pdf (S. 5)",
+        "03_MaschinellesLernen.pdf (S. 3)",
+        "03_MaschinellesLernen.pdf (S. 4)"
+      ],
+      "timestamp": "2026-05-21T23:01:25.256964Z"
+    }
+  ],
+  "last_updated": "2026-05-21T23:01:25.256964Z"
+}
