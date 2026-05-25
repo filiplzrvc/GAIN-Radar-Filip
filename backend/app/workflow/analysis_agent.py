@@ -69,8 +69,7 @@ def run_analysis_agent(state: WorkflowState) -> WorkflowState:
         full_input = state.user_question
     
     # LLM-Chain bauen: Prompt → LLM → String
-    chain = analysis_prompt | analysis_llm | StrOutputParser()
-    
+    chain = analysis_prompt | analysis_llm | StrOutputParser().with_config(run_name="AnfrageanalyseAgent")
     try:
         # LLM aufrufen mit der erweiterten Eingabe
         raw_response = chain.invoke({"user_input": full_input})

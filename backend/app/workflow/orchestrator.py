@@ -4,6 +4,7 @@ Aufgabe:
 - Lädt Konversations-Verlauf am Anfang
 - Speichert das neue Q&A-Paar am Ende
 """
+from langsmith import traceable
 from typing import Optional
 from app.workflow.state import WorkflowState
 from app.workflow.analysis_agent import run_analysis_agent
@@ -12,7 +13,7 @@ from app.workflow.context_agent import prepare_context
 from app.workflow.answer_agent import run_answer_agent
 from app.workflow.memory_manager import get_history_for_llm, append_to_session
 
-
+@traceable(name="GAIN-Radar Orchestrator")
 def process_request(
     question: str,
     course: str,

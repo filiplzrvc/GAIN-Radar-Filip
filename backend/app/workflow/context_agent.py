@@ -8,7 +8,9 @@ Aufgabe:
 - Baut einen strukturierten Context-String für das Antwort-LLM
 - Setzt context_quality im State, die der Antwort-Agent nutzt
 """
+from langsmith import traceable
 from app.workflow.state import WorkflowState
+
 
 
 # Schwellwerte für Qualitätsbewertung
@@ -25,7 +27,7 @@ MIN_TOTAL_CONTEXT_LENGTH = 500 # Gesamttext mind. 500 Zeichen
     Returns:
         Aktualisierter State mit prepared_context und context_quality
 """
-
+@traceable(name="Kontext-Filter")
 def prepare_context(state: WorkflowState) -> WorkflowState:
     
     # Wenn Retrieval übersprungen wurde, auch hier nichts tun

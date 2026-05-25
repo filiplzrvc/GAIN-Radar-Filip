@@ -7,10 +7,12 @@ Aufgabe:
 - Schreibt die gefundenen Dokumente in den State
 - Loggt die Aktion für die Trace
 """
+
+from langsmith import traceable
 from app.workflow.state import WorkflowState, RetrievedDocument
 from app.core.retriever import get_context_retriever
 
-
+@traceable(name="Retrieval-Agent")
 def retrieve_documents(state: WorkflowState) -> WorkflowState:
     # Defensive Checks
     if state.decisions.off_topic:
@@ -40,7 +42,7 @@ def retrieve_documents(state: WorkflowState) -> WorkflowState:
             search_query = state.user_question
         
         # Suche durchführen
-        docs = retriever.invoke(search_query)
+        docs = retriever.invoke(search_query, config_run_name="Vektor-Suche")
         
         # LangChain-Documents in unsere RetrievedDocument-Struktur konvertieren
         retrieved = []
