@@ -102,7 +102,7 @@ def _translate(text: str, target_language: str) -> str:
              f"Translate to language code '{target_language}':\n\n{{text}}")
         ])
         
-        translate_chain = translate_prompt | answer_llm | StrOutputParser().with_config(run_name="AntwortAgent-Übersetzung")
+        translate_chain = translate_prompt | answer_llm | StrOutputParser()
         translated = translate_chain.invoke({"text": text})
         return translated.strip()
     
@@ -202,7 +202,7 @@ def _generate_llm_answer(state: WorkflowState, with_warning: bool = False) -> st
         ("human", "{user_input}")
     ])
     
-    chain = dynamic_prompt | answer_llm | StrOutputParser().with_config(run_name="AntwortAgent")
+    chain = dynamic_prompt | answer_llm | StrOutputParser()
     
     # User-Input zusammenbauen 
     user_input_parts = []
@@ -231,11 +231,13 @@ def _generate_llm_answer(state: WorkflowState, with_warning: bool = False) -> st
     
     full_user_input = "\n".join(user_input_parts)
     
-    return chain.invoke({
+    return chain.invoke(
+    {
         "context": state.prepared_context or "",
         "user_input": full_user_input
-    })
-
+    },
+    config={"run_name": "3. Antwort-Generierung"} 
+)
 
 def _handle_llm_answer(state: WorkflowState, with_warning: bool = False) -> None:
     """

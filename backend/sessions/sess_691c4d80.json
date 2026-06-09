@@ -1,0 +1,22 @@
+{
+  "session_id": "sess_691c4d80",
+  "created_at": "2026-06-09T15:29:21.309503Z",
+  "course": "swen",
+  "messages": [
+    {
+      "role": "user",
+      "text": "Was sind die Prinzipien von SOLID?",
+      "timestamp": "2026-06-09T15:29:21.309503Z"
+    },
+    {
+      "role": "bot",
+      "text": "Die Prinzipien von SOLID sind eine Sammlung von fünf grundlegenden Prinzipien der objektorientierten Programmierung, die darauf abzielen, Software wartbarer und verständlicher zu gestalten. Diese Prinzipien sind:\n\n1. **Single-Responsibility Principle (SRP)**: Eine Klasse sollte nur eine einzige Verantwortung haben und diese gut erfüllen.\n2. **Open/Closed Principle (OCP)**: Softwaremodule sollten für Erweiterungen offen, aber für Modifikationen geschlossen sein.\n3. **Liskov Substitution Principle (LSP)**: Objekte einer abgeleiteten Klasse sollten durch Objekte der Basisklasse ersetzt werden können, ohne dass das Verhalten des Programms beeinträchtigt wird.\n4. **Interface Segregation Principle (ISP)**: Clients sollten nicht gezwungen werden, Schnittstellen zu implementieren, die sie nicht nutzen.\n5. **Dependency Inversion Principle (DIP)**: Abhängigkeiten sollten von Abstraktionen abhängen, nicht von konkreten Implementierungen.\n\nDiese Prinzipien fördern eine bessere Strukturierung und Modularität in der Softwareentwicklung.",
+      "sources": [
+        "07_SRP.pdf (S. 2)",
+        "07_SRP.pdf (S. 5)"
+      ],
+      "timestamp": "2026-06-09T15:29:21.309503Z"
+    }
+  ],
+  "last_updated": "2026-06-09T15:29:21.309503Z"
+}

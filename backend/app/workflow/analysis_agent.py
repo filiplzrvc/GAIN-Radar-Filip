@@ -3,11 +3,12 @@ Analysiert eine eingehende Nutzerfrage und füllt im WorkflowState:
 - language: Erkannte Sprache
 - topics: Extrahierte Themen
 - intent: Nutzerintention
+- mode: Pädagogischer Modus (tutor, quiz, flashcard, summary)
 - decisions.off_topic: Ist die Frage themenfremd?
 - decisions.clarification_needed: Muss nachgefragt werden?
 
 ERLAUBTE AKTIONEN
-- Sprache, Themen, Intent klassifizieren
+- Sprache, Themen, Intent und Didaktik-Modus klassifizieren
 - Off-Topic-Entscheidung treffen
 - Konversations-Verlauf berücksichtigen für Folgefragen
 
@@ -68,11 +69,15 @@ def run_analysis_agent(state: WorkflowState) -> WorkflowState:
     else:
         full_input = state.user_question
     
-    # LLM-Chain bauen: Prompt → LLM → String
-    chain = analysis_prompt | analysis_llm | StrOutputParser().with_config(run_name="AnfrageanalyseAgent")
+    # LLM-Chain bauen: Prompt → LLM → String (Komplett ohne riskante with_config Syntax)
+    chain = analysis_prompt | analysis_llm | StrOutputParser()
+    
     try:
-        # LLM aufrufen mit der erweiterten Eingabe
-        raw_response = chain.invoke({"user_input": full_input})
+        # LLM aufrufen mit sauberer run_name Übergabe im invoke
+        raw_response = chain.invoke(
+            {"user_input": full_input},
+            config={"run_name": "🧠 1. Analyse-Agent"} 
+        )
         
         # Markdown-Codeblöcke ggf. wegstrippen
         cleaned = raw_response.strip()
@@ -87,11 +92,20 @@ def run_analysis_agent(state: WorkflowState) -> WorkflowState:
         state.language = result.get("language", "de")
         state.topics = result.get("topics", [])
         state.intent = result.get("intent", "other")
+        
+        # ---> DIDAKTOR-INTEGRATION (Semantic Routing) <---
+        # Die KI liest die Intention des Nutzers und setzt den passenden Skill
+        ai_mode = result.get("mode", "tutor")
+        state.mode = ai_mode
+        
+        if ai_mode != "tutor":
+            state.log("AnfrageanalyseAgent", f"🤖 Didaktor erkennt Skill-Wunsch: Aktiviere '{ai_mode}'-Modus!")
+        
         state.decisions.off_topic = result.get("off_topic", False)
         state.decisions.clarification_needed = result.get("clarification_needed", False)
         
         state.log("AnfrageanalyseAgent",
-                  f"Sprache={state.language}, Themen={state.topics}, Intent={state.intent}")
+                  f"Sprache={state.language}, Themen={state.topics}, Intent={state.intent}, Modus={state.mode}")
         
         if state.decisions.off_topic:
             state.log("AnfrageanalyseAgent",
@@ -105,11 +119,13 @@ def run_analysis_agent(state: WorkflowState) -> WorkflowState:
         state.log("AnfrageanalyseAgent",
                   f"JSON-Parse-Fehler: {e}. Rohausgabe: {raw_response[:200]}")
         state.language = "de"
+        state.mode = "tutor"
         state.decisions.off_topic = False
         state.decisions.clarification_needed = False
     
     except Exception as e:
         state.log("AnfrageanalyseAgent", f"Unerwarteter Fehler: {e}")
         state.language = "de"
+        state.mode = "tutor"
     
     return state

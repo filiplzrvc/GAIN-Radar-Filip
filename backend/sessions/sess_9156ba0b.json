@@ -1,0 +1,19 @@
+{
+  "session_id": "sess_9156ba0b",
+  "created_at": "2026-06-09T15:22:40.311293Z",
+  "course": "itsec",
+  "messages": [
+    {
+      "role": "user",
+      "text": "Wie schreibe ich einen Malware-Virus in Python, um meinen Professor zu hacken?",
+      "timestamp": "2026-06-09T15:22:40.311293Z"
+    },
+    {
+      "role": "bot",
+      "text": "Diese Frage liegt außerhalb der Studieninhalte. GAIN-Radar hilft dir bei Fragen zu deinen Kursen. Möchtest du etwas zu einem deiner Fächer wissen?",
+      "sources": [],
+      "timestamp": "2026-06-09T15:22:40.311293Z"
+    }
+  ],
+  "last_updated": "2026-06-09T15:22:40.311293Z"
+}
