@@ -11,13 +11,24 @@ import uvicorn
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 
+# IMPORTS FÜR DEN TURBO-CACHE
+#from langchain.globals import set_llm_cache
+from langchain_community.cache import InMemoryCache
+
+
 from app.models.schema import (
     ChatRequest, ChatResponse,
     CourseInfo, CoursesResponse
 )
 from app.workflow.orchestrator import process_request
 
+
 app = FastAPI(title="GAIN-Radar Backend API", version="0.3.0")
+
+# PERFORMANCE OPTIMIERUNG: Globaler LLM-Cache
+# Merkt sich bereits generierte Antworten im Arbeitsspeicher.
+# Wenn dieselbe Frage nochmal kommt, sinkt die Wartezeit auf 0,01 Sekunden!
+set_llm_cache(InMemoryCache())
 
 # CORS für Angular-Frontend
 app.add_middleware(
