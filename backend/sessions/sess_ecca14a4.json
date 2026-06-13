@@ -1,0 +1,19 @@
+{
+  "session_id": "sess_ecca14a4",
+  "created_at": "2026-06-13T20:02:10.084131Z",
+  "course": "swen",
+  "messages": [
+    {
+      "role": "user",
+      "text": "Wer hat die Champions League 2022 gewonnen?",
+      "timestamp": "2026-06-13T20:02:10.084131Z"
+    },
+    {
+      "role": "bot",
+      "text": "Diese Frage liegt außerhalb der Studieninhalte. GAIN-Radar hilft dir bei Fragen zu deinen Kursen. Möchtest du etwas zu einem deiner Fächer wissen?",
+      "sources": [],
+      "timestamp": "2026-06-13T20:02:10.084131Z"
+    }
+  ],
+  "last_updated": "2026-06-13T20:02:10.084131Z"
+}

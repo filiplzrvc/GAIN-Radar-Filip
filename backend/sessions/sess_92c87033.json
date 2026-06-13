@@ -1,0 +1,24 @@
+{
+  "session_id": "sess_92c87033",
+  "created_at": "2026-06-13T21:45:57.372032Z",
+  "course": "aief",
+  "messages": [
+    {
+      "role": "user",
+      "text": "Was ist der Unterschied zwischen Supervised und Unsupervised Learning?",
+      "timestamp": "2026-06-13T21:45:57.372032Z"
+    },
+    {
+      "role": "bot",
+      "text": "Der Unterschied zwischen überwachten (supervised) und unüberwachten (unsupervised) Lernen liegt in der Art der verwendeten Trainingsdaten:\n\n- **Überwachtes Lernen**: Hier hat das System eine große Menge an klassifizierten Trainingsdaten. Das Ziel ist es, aus diesen Daten zu lernen, um neue, bislang nicht klassifizierte Instanzen korrekt einordnen zu können.\n\n- **Unüberwachtes Lernen**: In diesem Fall gibt es keine Trainingsdaten, die klassifiziert sind. Das System versucht, Muster und Ähnlichkeiten in den Daten zu erkennen, ohne Referenzwerte zu haben. Ein Beispiel für unüberwachtes Lernen ist das Clustering, bei dem Strukturen in den Trainingsdaten gefunden werden sollen.\n\nMöchtest du mehr über ein bestimmtes Thema in diesem Zusammenhang erfahren?",
+      "sources": [
+        "03_MaschinellesLernen.pdf (S. 11)",
+        "03_MaschinellesLernen.pdf (S. 28)",
+        "03_MaschinellesLernen.pdf (S. 29)",
+        "04_NeuronaleNetze.pdf (S. 44)"
+      ],
+      "timestamp": "2026-06-13T21:45:57.372032Z"
+    }
+  ],
+  "last_updated": "2026-06-13T21:45:57.372032Z"
+}

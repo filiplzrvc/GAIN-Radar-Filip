@@ -1,0 +1,19 @@
+{
+  "session_id": "sess_e56223c7",
+  "created_at": "2026-06-13T21:46:49.956417Z",
+  "course": "aief",
+  "messages": [
+    {
+      "role": "user",
+      "text": "Erzähl mir einen Witz.",
+      "timestamp": "2026-06-13T21:46:49.956417Z"
+    },
+    {
+      "role": "bot",
+      "text": "Diese Frage liegt außerhalb der Studieninhalte. GAIN-Radar hilft dir bei Fragen zu deinen Kursen. Möchtest du etwas zu einem deiner Fächer wissen?",
+      "sources": [],
+      "timestamp": "2026-06-13T21:46:49.956417Z"
+    }
+  ],
+  "last_updated": "2026-06-13T21:46:49.956417Z"
+}

@@ -1,0 +1,19 @@
+{
+  "session_id": "sess_20ec76bf",
+  "created_at": "2026-06-13T21:29:40.704070Z",
+  "course": "swen",
+  "messages": [
+    {
+      "role": "user",
+      "text": "Hallo GAIN-Radar!",
+      "timestamp": "2026-06-13T21:29:40.704070Z"
+    },
+    {
+      "role": "bot",
+      "text": "Diese Frage liegt außerhalb der Studieninhalte. GAIN-Radar hilft dir bei Fragen zu deinen Kursen. Möchtest du etwas zu einem deiner Fächer wissen?",
+      "sources": [],
+      "timestamp": "2026-06-13T21:29:40.704070Z"
+    }
+  ],
+  "last_updated": "2026-06-13T21:29:40.704070Z"
+}

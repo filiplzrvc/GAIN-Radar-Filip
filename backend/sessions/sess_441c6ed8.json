@@ -1,0 +1,19 @@
+{
+  "session_id": "sess_441c6ed8",
+  "created_at": "2026-06-13T22:15:29.318295Z",
+  "course": "swen",
+  "messages": [
+    {
+      "role": "user",
+      "text": "Wie koche ich Spaghetti Carbonara?",
+      "timestamp": "2026-06-13T22:15:29.318295Z"
+    },
+    {
+      "role": "bot",
+      "text": "Diese Frage liegt außerhalb der Studieninhalte. GAIN-Radar hilft dir bei Fragen zu deinen Kursen. Möchtest du etwas zu einem deiner Fächer wissen?",
+      "sources": [],
+      "timestamp": "2026-06-13T22:15:29.318295Z"
+    }
+  ],
+  "last_updated": "2026-06-13T22:15:29.318295Z"
+}

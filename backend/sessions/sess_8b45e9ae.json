@@ -1,0 +1,25 @@
+{
+  "session_id": "sess_8b45e9ae",
+  "created_at": "2026-06-13T22:15:45.026256Z",
+  "course": "itsec",
+  "messages": [
+    {
+      "role": "user",
+      "text": "Explain Public Key Infrastructure.",
+      "timestamp": "2026-06-13T22:15:45.026256Z"
+    },
+    {
+      "role": "bot",
+      "text": "Public Key Infrastructure (PKI) is a framework that enables the creation, administration, distribution, storage, and revocation of digital certificates. It involves a combination of hardware, software, policies, and procedures to ensure secure communication and authentication over networks.\n\nKey components of PKI include:\n\n1. **Certificates**: Digital documents that bind a public key to an identity, allowing users to verify the authenticity of the key.\n2. **Registration Authority (RA)**: An entity that verifies the identity of users and issues certificates on behalf of a Certification Authority (CA).\n3. **Certification Authority (CA)**: The trusted entity that signs certificates, confirming that the information provided by the RA is correct.\n4. **Revocation**: If a certificate needs to be invalidated before its expiration (for example, if the private key is compromised), it is added to a Certificate Revocation List (CRL).\n\nOverall, PKI plays a crucial role in securing communications and ensuring trust in digital transactions. Would you like to know more about a specific aspect of PKI?",
+      "sources": [
+        "03_Hashing_PKI.pdf (S. 1)",
+        "03_Hashing_PKI.pdf (S. 13)",
+        "03_Hashing_PKI.pdf (S. 15)",
+        "03_Hashing_PKI.pdf (S. 16)",
+        "03_Hashing_PKI.pdf (S. 17)"
+      ],
+      "timestamp": "2026-06-13T22:15:45.026256Z"
+    }
+  ],
+  "last_updated": "2026-06-13T22:15:45.026256Z"
+}

@@ -1,0 +1,24 @@
+{
+  "session_id": "sess_2a9c3ef5",
+  "created_at": "2026-06-13T20:02:39.603476Z",
+  "course": "itsec",
+  "messages": [
+    {
+      "role": "user",
+      "text": "¿Qué es el phishing?",
+      "timestamp": "2026-06-13T20:02:39.603476Z"
+    },
+    {
+      "role": "bot",
+      "text": "El phishing es una técnica de fraude en línea que utiliza mensajes y sitios web falsos para engañar a las personas y obtener información confidencial, como contraseñas o datos de tarjetas de crédito. Los atacantes suelen hacerse pasar por entidades legítimas para ganarse la confianza de la víctima. \n\nUna variante específica de phishing es el spear-phishing, que está diseñado para dirigirse a una persona o un grupo pequeño de personas, utilizando información específica sobre la víctima para hacer el ataque más convincente.",
+      "sources": [
+        "02_Cryptography.pdf (S. 33)",
+        "03_Hashing_PKI.pdf (S. 3)",
+        "03_Hashing_PKI.pdf (S. 5)",
+        "05_Malware_SocialEngineering.pdf (S. 24)"
+      ],
+      "timestamp": "2026-06-13T20:02:39.603476Z"
+    }
+  ],
+  "last_updated": "2026-06-13T20:02:39.603476Z"
+}

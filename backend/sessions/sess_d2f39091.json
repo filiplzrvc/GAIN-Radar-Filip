@@ -1,0 +1,24 @@
+{
+  "session_id": "sess_d2f39091",
+  "created_at": "2026-06-13T22:23:58.357810Z",
+  "course": "aief",
+  "messages": [
+    {
+      "role": "user",
+      "text": "Was ist Overfitting?",
+      "timestamp": "2026-06-13T22:23:58.357810Z"
+    },
+    {
+      "role": "bot",
+      "text": "Overfitting, oder Überanpassung, tritt auf, wenn ein Modell zu stark an den Trainingsdaten angepasst wird. Dies führt dazu, dass die Fehlerrate auf den Trainingsdaten monoton abnimmt, jedoch nicht unbedingt auf den Testdaten. Ein Beispiel dafür ist, dass ab einer bestimmten Anzahl von Knoten, wie etwa 55, die Fehlerrate wieder steigt. Eine mögliche Lösung für Overfitting ist der Abbruch des Lernens bei dieser Knotenanzahl.",
+      "sources": [
+        "03_MaschinellesLernen.pdf (S. 16)",
+        "03_MaschinellesLernen.pdf (S. 22)",
+        "04_NeuronaleNetze.pdf (S. 21)",
+        "04_NeuronaleNetze.pdf (S. 22)"
+      ],
+      "timestamp": "2026-06-13T22:23:58.357810Z"
+    }
+  ],
+  "last_updated": "2026-06-13T22:23:58.357810Z"
+}

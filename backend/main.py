@@ -12,7 +12,7 @@ from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 
 # IMPORTS FÜR DEN TURBO-CACHE
-#from langchain.globals import set_llm_cache
+from langchain_core.globals import set_llm_cache
 from langchain_community.cache import InMemoryCache
 
 

@@ -1,0 +1,19 @@
+{
+  "session_id": "sess_12eb4637",
+  "created_at": "2026-06-13T22:23:43.310032Z",
+  "course": "swen",
+  "messages": [
+    {
+      "role": "user",
+      "text": "Was sind die Prinzipien von SOLID?",
+      "timestamp": "2026-06-13T22:23:43.310032Z"
+    },
+    {
+      "role": "bot",
+      "text": "Im verfügbaren Kursmaterial finde ich zu deiner Frage keine direkt passenden Informationen. Möchtest du die Frage in einem anderen Fach stellen oder dein Thema präzisieren?",
+      "sources": [],
+      "timestamp": "2026-06-13T22:23:43.310032Z"
+    }
+  ],
+  "last_updated": "2026-06-13T22:23:43.310032Z"
+}
