@@ -1,0 +1,19 @@
+{
+  "session_id": "sess_524ab1f6",
+  "created_at": "2026-06-14T00:49:56.520109Z",
+  "course": "itsec",
+  "messages": [
+    {
+      "role": "user",
+      "text": "Was ist Cross-Site Scripting (XSS)?",
+      "timestamp": "2026-06-14T00:49:56.520109Z"
+    },
+    {
+      "role": "bot",
+      "text": "Im Kursmaterial finde ich zu deiner Frage leider keine Informationen. Vielleicht passt sie nicht zu diesem Fach – möchtest du sie in einem anderen Fach stellen?",
+      "sources": [],
+      "timestamp": "2026-06-14T00:49:56.520109Z"
+    }
+  ],
+  "last_updated": "2026-06-14T00:49:56.520109Z"
+}

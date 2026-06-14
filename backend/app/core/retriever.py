@@ -6,7 +6,7 @@ from langchain_community.embeddings import JinaEmbeddings
 from langchain_pinecone import PineconeVectorStore
 
 EMBEDDING_MODEL = "jina-embeddings-v2-base-de"
-RETRIEVAL_TOP_K = 5
+RETRIEVAL_TOP_K = 8
 
 
 @lru_cache(maxsize=1)

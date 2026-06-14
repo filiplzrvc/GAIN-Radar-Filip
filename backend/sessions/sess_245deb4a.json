@@ -1,0 +1,74 @@
+{
+  "session_id": "sess_245deb4a",
+  "created_at": "2026-06-14T01:06:22.489333Z",
+  "course": "aief",
+  "messages": [
+    {
+      "role": "user",
+      "text": "ich will mich umbringen",
+      "timestamp": "2026-06-14T01:06:22.489333Z"
+    },
+    {
+      "role": "bot",
+      "text": "Deine Frage ist mir noch zu unklar. Kannst du sie etwas konkreter formulieren? Zum Beispiel: Welches Thema interessiert dich, oder zu welchem Konzept möchtest du mehr wissen?",
+      "sources": [],
+      "timestamp": "2026-06-14T01:06:22.489333Z"
+    },
+    {
+      "role": "user",
+      "text": "Kako si?",
+      "timestamp": "2026-06-14T01:06:36.797446Z"
+    },
+    {
+      "role": "bot",
+      "text": "This question is outside the scope of your course content. GAIN-Radar helps you with questions about your courses. Would you like to ask something about one of your subjects?",
+      "sources": [],
+      "timestamp": "2026-06-14T01:06:36.797446Z"
+    },
+    {
+      "role": "user",
+      "text": "Odgvori na srpskom",
+      "timestamp": "2026-06-14T01:06:55.630850Z"
+    },
+    {
+      "role": "bot",
+      "text": "This question is outside the scope of your course content. GAIN-Radar helps you with questions about your courses. Would you like to ask something about one of your subjects?",
+      "sources": [],
+      "timestamp": "2026-06-14T01:06:55.630850Z"
+    },
+    {
+      "role": "user",
+      "text": "Kannst du mir eklären worum es sich in diesem Kurs handelt",
+      "timestamp": "2026-06-14T01:07:21.863045Z"
+    },
+    {
+      "role": "bot",
+      "text": "Deine Frage ist mir noch zu unklar. Kannst du sie etwas konkreter formulieren? Zum Beispiel: Welches Thema interessiert dich, oder zu welchem Konzept möchtest du mehr wissen?",
+      "sources": [],
+      "timestamp": "2026-06-14T01:07:21.863045Z"
+    },
+    {
+      "role": "user",
+      "text": "Das Fach interessiert mich, worum geht es in diesem Fach?",
+      "timestamp": "2026-06-14T01:07:42.381979Z"
+    },
+    {
+      "role": "bot",
+      "text": "Deine Frage ist mir noch zu unklar. Kannst du sie etwas konkreter formulieren? Zum Beispiel: Welches Thema interessiert dich, oder zu welchem Konzept möchtest du mehr wissen?",
+      "sources": [],
+      "timestamp": "2026-06-14T01:07:42.381979Z"
+    },
+    {
+      "role": "user",
+      "text": "Kannst du mir das ganze Fach zusammenfassen",
+      "timestamp": "2026-06-14T01:08:07.013753Z"
+    },
+    {
+      "role": "bot",
+      "text": "Im verfügbaren Kursmaterial finde ich zu deiner Frage keine direkt passenden Informationen. Möchtest du die Frage in einem anderen Fach stellen oder dein Thema präzisieren?",
+      "sources": [],
+      "timestamp": "2026-06-14T01:08:07.013753Z"
+    }
+  ],
+  "last_updated": "2026-06-14T01:08:07.013753Z"
+}

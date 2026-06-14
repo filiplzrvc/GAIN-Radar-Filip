@@ -1,0 +1,19 @@
+{
+  "session_id": "sess_dc1d5755",
+  "created_at": "2026-06-14T00:53:33.528706Z",
+  "course": "itsec",
+  "messages": [
+    {
+      "role": "user",
+      "text": "¿Qué es el phishing?",
+      "timestamp": "2026-06-14T00:53:33.528706Z"
+    },
+    {
+      "role": "bot",
+      "text": "I couldn't find any information about your question in the course material. Maybe it doesn't fit this subject – would you like to ask in a different course?",
+      "sources": [],
+      "timestamp": "2026-06-14T00:53:33.528706Z"
+    }
+  ],
+  "last_updated": "2026-06-14T00:53:33.528706Z"
+}

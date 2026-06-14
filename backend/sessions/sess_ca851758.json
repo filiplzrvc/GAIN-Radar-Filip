@@ -1,0 +1,19 @@
+{
+  "session_id": "sess_ca851758",
+  "created_at": "2026-06-14T00:49:53.779321Z",
+  "course": "aief",
+  "messages": [
+    {
+      "role": "user",
+      "text": "Was ist Overfitting?",
+      "timestamp": "2026-06-14T00:49:53.779321Z"
+    },
+    {
+      "role": "bot",
+      "text": "Im Kursmaterial finde ich zu deiner Frage leider keine Informationen. Vielleicht passt sie nicht zu diesem Fach – möchtest du sie in einem anderen Fach stellen?",
+      "sources": [],
+      "timestamp": "2026-06-14T00:49:53.779321Z"
+    }
+  ],
+  "last_updated": "2026-06-14T00:49:53.779321Z"
+}

@@ -1,0 +1,19 @@
+{
+  "session_id": "sess_69664dd2",
+  "created_at": "2026-06-14T00:33:28.346708Z",
+  "course": "itsec",
+  "messages": [
+    {
+      "role": "user",
+      "text": "Wie funktioniert ein SQL-Injection Angriff?",
+      "timestamp": "2026-06-14T00:33:28.346708Z"
+    },
+    {
+      "role": "bot",
+      "text": "Im verfügbaren Kursmaterial finde ich zu deiner Frage keine direkt passenden Informationen. Möchtest du die Frage in einem anderen Fach stellen oder dein Thema präzisieren?",
+      "sources": [],
+      "timestamp": "2026-06-14T00:33:28.346708Z"
+    }
+  ],
+  "last_updated": "2026-06-14T00:33:28.346708Z"
+}

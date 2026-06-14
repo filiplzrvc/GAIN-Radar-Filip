@@ -1,0 +1,19 @@
+{
+  "session_id": "sess_cbd76e9e",
+  "created_at": "2026-06-14T00:50:22.815625Z",
+  "course": "itsec",
+  "messages": [
+    {
+      "role": "user",
+      "text": "Wie lautet das aktuelle Wetter in Wien?",
+      "timestamp": "2026-06-14T00:50:22.815625Z"
+    },
+    {
+      "role": "bot",
+      "text": "Diese Frage liegt außerhalb der Studieninhalte. GAIN-Radar hilft dir bei Fragen zu deinen Kursen. Möchtest du etwas zu einem deiner Fächer wissen?",
+      "sources": [],
+      "timestamp": "2026-06-14T00:50:22.815625Z"
+    }
+  ],
+  "last_updated": "2026-06-14T00:50:22.815625Z"
+}

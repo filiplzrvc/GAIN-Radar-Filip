@@ -85,7 +85,7 @@
     "question": "Wie konfiguriere ich eine Firewall?",
     "course": "aief",
     "mode": "tutor",
-    "expected_off_topic": true,
+    "expected_off_topic": false,
     "expected_context_quality": "none",
     "reference_answer": "Netzwerksicherheit und Firewalls gehören nicht zum Kurs Künstliche Intelligenz."
   },
@@ -95,7 +95,7 @@
     "question": "Was ist ein Decision Tree?",
     "course": "swen",
     "mode": "tutor",
-    "expected_off_topic": true,
+    "expected_off_topic": false,
     "expected_context_quality": "none",
     "reference_answer": "Decision Trees und Machine Learning sind nicht Teil des Software Engineering Kurses."
   },
@@ -105,7 +105,7 @@
     "question": "Erkläre mir agile Softwareentwicklung mit Scrum.",
     "course": "itsec",
     "mode": "tutor",
-    "expected_off_topic": true,
+    "expected_off_topic": false,
     "expected_context_quality": "none",
     "reference_answer": "Agile Projektmanagement-Methoden gehören nicht zu den Inhalten des IT Security Kurses."
   },

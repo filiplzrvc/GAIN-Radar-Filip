@@ -1,0 +1,19 @@
+{
+  "session_id": "sess_8e01254c",
+  "created_at": "2026-06-14T00:49:46.081690Z",
+  "course": "swen",
+  "messages": [
+    {
+      "role": "user",
+      "text": "Erkläre das MVC-Pattern.",
+      "timestamp": "2026-06-14T00:49:46.081690Z"
+    },
+    {
+      "role": "bot",
+      "text": "Im Kursmaterial finde ich zu deiner Frage leider keine Informationen. Vielleicht passt sie nicht zu diesem Fach – möchtest du sie in einem anderen Fach stellen?",
+      "sources": [],
+      "timestamp": "2026-06-14T00:49:46.081690Z"
+    }
+  ],
+  "last_updated": "2026-06-14T00:49:46.081690Z"
+}

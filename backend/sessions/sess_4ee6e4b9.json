@@ -1,0 +1,19 @@
+{
+  "session_id": "sess_4ee6e4b9",
+  "created_at": "2026-06-14T00:34:06.934468Z",
+  "course": "swen",
+  "messages": [
+    {
+      "role": "user",
+      "text": "Was bedeutet das?",
+      "timestamp": "2026-06-14T00:34:06.934468Z"
+    },
+    {
+      "role": "bot",
+      "text": "Deine Frage ist mir noch zu unklar. Kannst du sie etwas konkreter formulieren? Zum Beispiel: Welches Thema interessiert dich, oder zu welchem Konzept möchtest du mehr wissen?",
+      "sources": [],
+      "timestamp": "2026-06-14T00:34:06.934468Z"
+    }
+  ],
+  "last_updated": "2026-06-14T00:34:06.934468Z"
+}

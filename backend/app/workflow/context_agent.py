@@ -12,37 +12,29 @@ from langsmith import traceable
 from app.workflow.state import WorkflowState
 
 
-
 # Schwellwerte für Qualitätsbewertung
-MIN_CHUNK_LENGTH = 50          # Chunks unter 50 Zeichen sind nicht gebrauchbar
-MIN_DOCS_FOR_GOOD_CONTEXT = 3  # Mind. 3 Dokumente für "gute" Qualität
-MIN_TOTAL_CONTEXT_LENGTH = 500 # Gesamttext mind. 500 Zeichen
+MIN_CHUNK_LENGTH = 30
+MIN_DOCS_FOR_GOOD_CONTEXT = 2
+MIN_TOTAL_CONTEXT_LENGTH = 300
 
-"""
-    Filtert und bewertet den Kontext, bereitet ihn für den Antwort-Agent vor.
-    
-    Args:
-        state: Workflow-State mit retrieved_documents
-    
-    Returns:
-        Aktualisierter State mit prepared_context und context_quality
-"""
+
 @traceable(name="Kontext-Filter")
 def prepare_context(state: WorkflowState) -> WorkflowState:
-    
-    # Wenn Retrieval übersprungen wurde, auch hier nichts tun
+    """
+    Filtert und bewertet den Kontext, bereitet ihn für den Antwort-Agent vor.
+    """
     if state.decisions.off_topic or state.decisions.clarification_needed:
         state.log("ContextAgent", "Übersprungen: nicht anwendbar")
         state.context_quality = "none"
-        state.decisions.context_sufficient = False  
+        state.decisions.context_sufficient = False
         return state
-    
+
     docs = state.retrieved_documents
-    
+
     # Filter 1: Zu kurze Chunks raus
     filtered = [d for d in docs if len(d.content.strip()) >= MIN_CHUNK_LENGTH]
     removed_short = len(docs) - len(filtered)
-    
+
     # Filter 2: Duplikate raus (gleiche Quelle + Seite)
     seen = set()
     deduplicated = []
@@ -52,10 +44,10 @@ def prepare_context(state: WorkflowState) -> WorkflowState:
             seen.add(key)
             deduplicated.append(d)
     removed_dupes = len(filtered) - len(deduplicated)
-    
+
     # Qualitätsbewertung
     total_length = sum(len(d.content) for d in deduplicated)
-    
+
     if len(deduplicated) == 0:
         quality = "none"
         reason = "Keine verwertbaren Dokumente nach Filterung"
@@ -68,24 +60,22 @@ def prepare_context(state: WorkflowState) -> WorkflowState:
         quality = "sufficient"
         reason = f"{len(deduplicated)} Dokumente / {total_length} Zeichen"
         state.decisions.context_sufficient = True
-    
+
     # Strukturierten Kontext-Text bauen
     context_parts = []
     for i, doc in enumerate(deduplicated, 1):
-        # Klare Trennung mit Quellenangabe für das LLM
         header = f"[Quelle {i}: {doc.source_name}, Seite {doc.page}]"
         context_parts.append(f"{header}\n{doc.content.strip()}")
-    
+
     prepared_context = "\n\n---\n\n".join(context_parts)
-    
-    # State aktualisieren
+
     state.prepared_context = prepared_context
     state.context_quality = quality
-    state.retrieved_documents = deduplicated  # gefilterte Liste zurückschreiben
-    
+    state.retrieved_documents = deduplicated
+
     state.log(
         "ContextAgent",
         f"Qualität: {quality}. {reason}. Entfernt: {removed_short} kurz, {removed_dupes} Duplikate."
     )
-    
+
     return state

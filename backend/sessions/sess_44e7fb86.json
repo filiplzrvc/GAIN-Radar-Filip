@@ -1,0 +1,19 @@
+{
+  "session_id": "sess_44e7fb86",
+  "created_at": "2026-06-14T00:45:40.145996Z",
+  "course": "aief",
+  "messages": [
+    {
+      "role": "user",
+      "text": "Wie konfiguriere ich eine Firewall?",
+      "timestamp": "2026-06-14T00:45:40.145996Z"
+    },
+    {
+      "role": "bot",
+      "text": "Im Kursmaterial finde ich zu deiner Frage leider keine Informationen. Vielleicht passt sie nicht zu diesem Fach – möchtest du sie in einem anderen Fach stellen?",
+      "sources": [],
+      "timestamp": "2026-06-14T00:45:40.145996Z"
+    }
+  ],
+  "last_updated": "2026-06-14T00:45:40.145996Z"
+}

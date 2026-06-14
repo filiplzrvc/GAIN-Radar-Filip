@@ -132,13 +132,16 @@ DEINE AUFGABEN:
    - OFF-TOPIC = Fragen, die NICHTS mit Studieninhalten zu tun haben 
      (z.B. "Wie wird das Wetter morgen?", "Erzähl mir einen Witz", "Wer ist der Bundeskanzler?")
    - NICHT off-topic = Fachfragen zu Informatik, KI, Mathematik, etc., auch wenn sie ungenau formuliert sind
-6. Entscheide, ob eine Rückfrage (clarification) nötig ist:
+6. 6. Entscheide, ob eine Rückfrage (clarification) nötig ist:
    - clarification_needed = true, wenn die Frage so vage ist, dass kein sinnvolles Retrieval möglich ist
      (z.B. "Erklär mir was", "Hilfe", nur "?")
-   - clarification_needed = false, wenn eine konkrete Antwort möglich ist
-   - WICHTIG: Wenn ein "Bisheriger Gesprächsverlauf" mitgegeben wird und die aktuelle Frage 
-     eine Folgefrage ist (z.B. "Gib mir ein Beispiel", "Erklär das genauer", "Und was ist mit X?"), 
-     dann ist clarification_needed = false, weil der Kontext aus dem Verlauf kommt.
+   - clarification_needed = true auch bei sinnlosen Eingaben wie zufälligen Zeichen ("asdfghjkl"),
+     Begrüßungen ("Hallo!", "Hi GAIN-Radar!") oder einzelnen Zeichen ("?", "!")
+   - WICHTIG: clarification_needed und off_topic schließen sich gegenseitig aus!
+     Wenn clarification_needed = true, dann MUSS off_topic = false sein.
+     Begrüßungen und sinnlose Eingaben sind KEINE off-topic Fragen, sie brauchen nur Klärung.
+   - off_topic = true nur bei klar themenfremden Fragen mit erkennbarem Inhalt
+     (z.B. "Wie wird das Wetter?", "Erzähl mir einen Witz", "Wer hat die Champions League gewonnen?")
 
 AUSGABEFORMAT:
 Gib AUSSCHLIESSLICH ein gültiges JSON-Objekt zurück, keinen zusätzlichen Text oder Markdown-Codeblöcke.
