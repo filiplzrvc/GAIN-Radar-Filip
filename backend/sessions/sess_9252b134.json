@@ -93,7 +93,47 @@
         "05_Fragenkatalog.pdf (S. 2)"
       ],
       "timestamp": "2026-06-15T21:53:51.972259Z"
+    },
+    {
+      "role": "user",
+      "text": "Worüber haben wir bis jetzt geredet",
+      "timestamp": "2026-06-15T21:55:42.782199Z"
+    },
+    {
+      "role": "bot",
+      "text": "Wir haben bisher über das Thema Overfitting gesprochen, das auftritt, wenn ein Modell zu stark an die Trainingsdaten angepasst wird. Außerdem haben wir Lernkarten zu verschiedenen Konzepten im Bereich des maschinellen Lernens erstellt, darunter maschinelles Lernen, Entscheidungsbäume, den Brute Force-Ansatz, den heuristischen Algorithmus, Backpropagation, den MNIST-Datensatz, gängige Deep Learning-Bibliotheken, Reinforcement Learning sowie false positives und false negatives. Möchtest du zu einem bestimmten Thema mehr Informationen?",
+      "sources": [
+        "01_Grundlagen.pdf (S. 10)",
+        "01_Grundlagen.pdf (S. 13)",
+        "01_Grundlagen.pdf (S. 33)",
+        "01_Grundlagen.pdf (S. 35)",
+        "01_Grundlagen.pdf (S. 36)",
+        "01_Grundlagen.pdf (S. 8)",
+        "04_NeuronaleNetze.pdf (S. 35)",
+        "04_NeuronaleNetze.pdf (S. 36)"
+      ],
+      "timestamp": "2026-06-15T21:55:42.782199Z"
+    },
+    {
+      "role": "user",
+      "text": "Fasse mir das wichtigste aus dem Fach zusammen",
+      "timestamp": "2026-06-15T21:56:46.280864Z"
+    },
+    {
+      "role": "bot",
+      "text": "**Kernbotschaft:** Das Fachgebiet des maschinellen Lernens umfasst Methoden, die es Computern ermöglichen, aus Daten zu lernen und Vorhersagen zu treffen. Es wird zwischen überwachten und unüberwachten Lernverfahren unterschieden, wobei Überanpassung (Overfitting) ein häufiges Problem darstellt, das auftritt, wenn Modelle zu stark an Trainingsdaten angepasst werden.\n\n**Wichtigste Punkte:**\n- Maschinelles Lernen ist ein Teilbereich der Künstlichen Intelligenz, der Mustererkennung und Vorhersagen ermöglicht.\n- Überwachtes Lernen beinhaltet Klassifikation und Regression, während unüberwachtes Lernen Clustering und Assoziationsregeln umfasst.\n- Overfitting führt zu einer schlechten Leistung auf neuen Daten und kann durch Abbruch des Lernens bei einer bestimmten Modellkomplexität gemindert werden.\n- Entscheidungsbäume sind ein häufig verwendetes Modell, das sowohl für Klassifikation als auch für Regression eingesetzt wird.",
+      "sources": [
+        "01_Grundlagen.pdf (S. 2)",
+        "01_Grundlagen.pdf (S. 3)",
+        "03_MaschinellesLernen.pdf (S. 1)",
+        "03_MaschinellesLernen.pdf (S. 12)",
+        "03_MaschinellesLernen.pdf (S. 2)",
+        "03_MaschinellesLernen.pdf (S. 3)",
+        "03_MaschinellesLernen.pdf (S. 8)",
+        "04_NeuronaleNetze.pdf (S. 25)"
+      ],
+      "timestamp": "2026-06-15T21:56:46.280864Z"
     }
   ],
-  "last_updated": "2026-06-15T21:53:51.972259Z"
+  "last_updated": "2026-06-15T21:56:46.280864Z"
 }

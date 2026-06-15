@@ -59,13 +59,11 @@
               class="flashcard-wrapper"
               (click)="flipCard(msg, i)">
               <div class="flashcard" [class.flipped]="card.flipped">
-                <!-- Vorderseite -->
                 <div class="flashcard-face flashcard-front">
                   <div class="face-label">Frage</div>
                   <div class="face-content">{{ card.front }}</div>
                   <div class="flip-hint">↩ Umdrehen</div>
                 </div>
-                <!-- Rückseite -->
                 <div class="flashcard-face flashcard-back">
                   <div class="face-label">Antwort</div>
                   <div class="face-content">{{ card.back }}</div>
@@ -75,19 +73,43 @@
             </div>
           </div>
 
-          <!-- Quellen unter den Karten -->
-          <small *ngIf="msg.sources && msg.sources.length > 0" class="sources-line">
-            <strong>Quellen:</strong> {{ msg.sources.join(', ') }}
-          </small>
+          <!-- Klickbare Quellen unter den Karten -->
+          <div *ngIf="msg.sources && msg.sources.length > 0" class="sources-container">
+            <span class="sources-label">📄 Quellen:</span>
+            <span *ngFor="let source of msg.sources; let last = last">
+              <a
+                class="source-link"
+                [href]="buildPdfUrl(source)"
+                target="_blank"
+                rel="noopener"
+                [title]="'PDF öffnen: ' + source">
+                📎 {{ source }}
+              </a>
+              <span *ngIf="!last" class="source-sep"> · </span>
+            </span>
+          </div>
         </div>
 
         <!-- Normaler Nachrichten-Bubble -->
         <ng-template #normalBubble>
           <div class="bubble">
             <p>{{ msg.text }}</p>
-            <small *ngIf="msg.sources && msg.sources.length > 0">
-              <strong>Quellen:</strong> {{ msg.sources.join(', ') }}
-            </small>
+
+            <!-- Klickbare Quellen im normalen Bubble -->
+            <div *ngIf="msg.sources && msg.sources.length > 0" class="sources-container inline">
+              <span class="sources-label">📄 Quellen:</span>
+              <span *ngFor="let source of msg.sources; let last = last">
+                <a
+                  class="source-link"
+                  [href]="buildPdfUrl(source)"
+                  target="_blank"
+                  rel="noopener"
+                  [title]="'PDF öffnen: ' + source">
+                  📎 {{ source }}
+                </a>
+                <span *ngIf="!last" class="source-sep"> · </span>
+              </span>
+            </div>
           </div>
         </ng-template>
       </div>

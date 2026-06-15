@@ -71,30 +71,61 @@ export class ChatComponent implements OnInit {
   }
 
   /**
+   * Baut die URL für eine klickbare Quelle.
+   *
+   * Eingabe vom Backend:  "03_MaschinellesLernen.pdf (S. 12)"
+   * Ausgabe:              "http://localhost:8000/api/pdf/03_MaschinellesLernen.pdf#page=12"
+   *
+   * Das #page=N Fragment wird von allen modernen PDF-Viewern (Chrome, Firefox, Edge)
+   * unterstützt und springt direkt zur richtigen Seite.
+   */
+  buildPdfUrl(source: string): string {
+    if (!this.selectedCourse) {
+      return '#';
+    }
+
+    const course = this.selectedCourse.code;
+
+    // Format: "Dateiname.pdf (S. 12)"
+    const match = source.match(/^(.+?\.pdf)\s*\(S\.\s*(\d+)\)$/i);
+
+    if (match) {
+      const filename = match[1].trim();
+      const page = match[2];
+
+      return `http://localhost:8000/api/pdf/${encodeURIComponent(course)}/${encodeURIComponent(filename)}#page=${page}`;
+    }
+
+    // Fallback: nur Dateiname ohne Seite
+    const pdfMatch = source.match(/^(.+?\.pdf)/i);
+
+    if (pdfMatch) {
+      const filename = pdfMatch[1].trim();
+
+      return `http://localhost:8000/api/pdf/${encodeURIComponent(course)}/${encodeURIComponent(filename)}`;
+    }
+
+    return '#';
+  }
+
+  /**
    * Parst den Backend-Text und erkennt ob es Lernkarten sind.
-   * Format: **KARTENVORDERSEITE (...):** ... **KARTENRÜCKSEITE (...):** ... ---
    */
   private parseFlashcards(text: string): Flashcard[] | null {
-    // Prüfen ob KARTENVORDERSEITE im Text vorkommt
     if (!text.includes('KARTENVORDERSEITE') || !text.includes('KARTENRÜCKSEITE')) {
       return null;
     }
 
     const cards: Flashcard[] = [];
-
-    // Karten splitten: getrennt durch " --- " oder "---"
-    // Manche Karten beginnen mit **KARTENVORDERSEITE...
     const cardBlocks = text.split(/\s*---\s*/);
 
     for (const block of cardBlocks) {
       const trimmed = block.trim();
       if (!trimmed || !trimmed.includes('KARTENVORDERSEITE')) continue;
 
-      // Vorderseite extrahieren: Text nach "KARTENVORDERSEITE (...)**" bis zur Rückseite
       const frontMatch = trimmed.match(
         /\*\*KARTENVORDERSEITE[^*]*\*\*[:\s]*([\s\S]*?)(?=\*\*KARTENRÜCKSEITE)/i,
       );
-      // Rückseite extrahieren: Text nach "KARTENRÜCKSEITE (...)**" bis Ende
       const backMatch = trimmed.match(/\*\*KARTENRÜCKSEITE[^*]*\*\*[:\s]*([\s\S]*?)$/i);
 
       if (frontMatch && backMatch) {
@@ -102,10 +133,7 @@ export class ChatComponent implements OnInit {
           .trim()
           .replace(/^\*\*|\*\*$/g, '')
           .trim();
-        const back = backMatch[1]
-          .trim()
-          // Aufzählungspunkte sauber halten
-          .replace(/^- /gm, '• ');
+        const back = backMatch[1].trim().replace(/^- /gm, '• ');
 
         if (front && back) {
           cards.push({ front, back, flipped: false });
@@ -143,7 +171,6 @@ export class ChatComponent implements OnInit {
             this.sessionId = res.session_id;
           }
 
-          // Versuchen Lernkarten zu parsen
           const flashcards = this.parseFlashcards(res.reply);
 
           const botMsg: Message = {
