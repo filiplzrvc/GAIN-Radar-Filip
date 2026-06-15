@@ -9,17 +9,14 @@
     <div class="courses-menu">
       <h3>Fächer</h3>
 
-      <!-- Loading-State -->
       <div *ngIf="courses.length === 0 && !coursesError" class="loading-hint">
         Lade Fächer...
       </div>
 
-      <!-- Fehler-State -->
       <div *ngIf="coursesError" class="error-hint">
         {{ coursesError }}
       </div>
 
-      <!-- Fächer-Buttons -->
       <button
         *ngFor="let course of courses"
         [class.active]="selectedCourse?.code === course.code"
@@ -42,23 +39,59 @@
     </header>
 
     <div class="chat-window">
-      <!-- Empty-State: keine Nachrichten -->
       <div *ngIf="messages.length === 0 && selectedCourse" class="empty-state">
         <p>Stelle eine Frage zu <strong>{{ selectedCourse.name }}</strong>.</p>
         <small>{{ selectedCourse.description }}</small>
       </div>
 
-      <!-- Nachrichten -->
       <div *ngFor="let msg of messages" class="message" [ngClass]="msg.sender">
-        <div class="bubble">
-          <p>{{ msg.text }}</p>
-          <small *ngIf="msg.sources && msg.sources.length > 0">
+
+        <!-- Lernkarten-Layout -->
+        <div *ngIf="msg.isFlashcardMessage && msg.flashcards; else normalBubble" class="flashcard-section">
+          <div class="flashcard-header">
+            <span class="flashcard-icon">🃏</span>
+            <span>{{ msg.flashcards.length }} Lernkarte{{ msg.flashcards.length !== 1 ? 'n' : '' }} – auf Karte klicken zum Umdrehen</span>
+          </div>
+
+          <div class="flashcard-grid">
+            <div
+              *ngFor="let card of msg.flashcards; let i = index"
+              class="flashcard-wrapper"
+              (click)="flipCard(msg, i)">
+              <div class="flashcard" [class.flipped]="card.flipped">
+                <!-- Vorderseite -->
+                <div class="flashcard-face flashcard-front">
+                  <div class="face-label">Frage</div>
+                  <div class="face-content">{{ card.front }}</div>
+                  <div class="flip-hint">↩ Umdrehen</div>
+                </div>
+                <!-- Rückseite -->
+                <div class="flashcard-face flashcard-back">
+                  <div class="face-label">Antwort</div>
+                  <div class="face-content">{{ card.back }}</div>
+                  <div class="flip-hint">↩ Umdrehen</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Quellen unter den Karten -->
+          <small *ngIf="msg.sources && msg.sources.length > 0" class="sources-line">
             <strong>Quellen:</strong> {{ msg.sources.join(', ') }}
           </small>
         </div>
+
+        <!-- Normaler Nachrichten-Bubble -->
+        <ng-template #normalBubble>
+          <div class="bubble">
+            <p>{{ msg.text }}</p>
+            <small *ngIf="msg.sources && msg.sources.length > 0">
+              <strong>Quellen:</strong> {{ msg.sources.join(', ') }}
+            </small>
+          </div>
+        </ng-template>
       </div>
 
-      <!-- Loading-Indicator -->
       <div *ngIf="isLoading" class="message bot">
         <div class="bubble typing">Agent überlegt...</div>
       </div>
@@ -70,7 +103,7 @@
           [(ngModel)]="userInput"
           (keyup.enter)="sendMessage()"
           [disabled]="!selectedCourse"
-          [placeholder]="selectedCourse 
+          [placeholder]="selectedCourse
             ? 'Schreibe eine Frage zu ' + selectedCourse.name + '...'
             : 'Wähle zuerst ein Fach aus...'">
         <button (click)="sendMessage()" [disabled]="isLoading || !selectedCourse">

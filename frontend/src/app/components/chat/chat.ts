@@ -3,6 +3,20 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ChatService, Course } from '../../services/chat';
 
+export interface Flashcard {
+  front: string;
+  back: string;
+  flipped: boolean;
+}
+
+export interface Message {
+  text: string;
+  sender: 'user' | 'bot';
+  sources?: string[];
+  flashcards?: Flashcard[];
+  isFlashcardMessage?: boolean;
+}
+
 @Component({
   selector: 'app-chat',
   standalone: true,
@@ -11,37 +25,27 @@ import { ChatService, Course } from '../../services/chat';
   styleUrl: './chat.scss',
 })
 export class ChatComponent implements OnInit {
-  // User-Eingabe
   userInput: string = '';
   isLoading: boolean = false;
 
-  // Fächer & Auswahl
   courses: Course[] = [];
   selectedCourse: Course | null = null;
   coursesError: string = '';
 
-  // Modi (für später - aktuell nur tutor aktiv)
   selectedMode: string = 'tutor';
 
-  // Chat-Verlauf + Session
-  messages: any[] = [];
-  sessionId: string | null = null; // wird vom Backend mit der ersten Antwort gesetzt
+  messages: Message[] = [];
+  sessionId: string | null = null;
 
   constructor(
     private chatService: ChatService,
     private cdr: ChangeDetectorRef,
   ) {}
 
-  /**
-   * Beim Laden der Komponente: Fächer vom Backend holen.
-   */
   ngOnInit(): void {
     this.loadCourses();
   }
 
-  /**
-   * Lädt die Fächer-Liste vom Backend.
-   */
   loadCourses(): void {
     this.chatService.getCourses().subscribe({
       next: (res) => {
@@ -49,8 +53,6 @@ export class ChatComponent implements OnInit {
         if (this.courses.length > 0) {
           this.selectedCourse = this.courses[0];
         }
-        // FIX: Change Detection manuell auslösen,
-        // weil HTTP-Callback außerhalb der Zone laufen kann
         this.cdr.detectChanges();
       },
       error: (err) => {
@@ -61,21 +63,66 @@ export class ChatComponent implements OnInit {
     });
   }
 
-  /**
-   * Wechselt das ausgewählte Fach und löscht den Chat-Verlauf.
-   * (Sonst hätte man Kontext-Mix zwischen Fächern.)
-   */
   selectCourse(course: Course): void {
-    if (this.selectedCourse?.code === course.code) return; // gleiche Auswahl
+    if (this.selectedCourse?.code === course.code) return;
     this.selectedCourse = course;
-    this.messages = []; // Chat zurücksetzen beim Fach-Wechsel
-    // Beim Fach-Wechsel neue Session starten - sonst mischt sich Kontext zwischen Fächern
+    this.messages = [];
     this.sessionId = null;
   }
 
   /**
-   * Sendet eine Nachricht ans Backend.
+   * Parst den Backend-Text und erkennt ob es Lernkarten sind.
+   * Format: **KARTENVORDERSEITE (...):** ... **KARTENRÜCKSEITE (...):** ... ---
    */
+  private parseFlashcards(text: string): Flashcard[] | null {
+    // Prüfen ob KARTENVORDERSEITE im Text vorkommt
+    if (!text.includes('KARTENVORDERSEITE') || !text.includes('KARTENRÜCKSEITE')) {
+      return null;
+    }
+
+    const cards: Flashcard[] = [];
+
+    // Karten splitten: getrennt durch " --- " oder "---"
+    // Manche Karten beginnen mit **KARTENVORDERSEITE...
+    const cardBlocks = text.split(/\s*---\s*/);
+
+    for (const block of cardBlocks) {
+      const trimmed = block.trim();
+      if (!trimmed || !trimmed.includes('KARTENVORDERSEITE')) continue;
+
+      // Vorderseite extrahieren: Text nach "KARTENVORDERSEITE (...)**" bis zur Rückseite
+      const frontMatch = trimmed.match(
+        /\*\*KARTENVORDERSEITE[^*]*\*\*[:\s]*([\s\S]*?)(?=\*\*KARTENRÜCKSEITE)/i,
+      );
+      // Rückseite extrahieren: Text nach "KARTENRÜCKSEITE (...)**" bis Ende
+      const backMatch = trimmed.match(/\*\*KARTENRÜCKSEITE[^*]*\*\*[:\s]*([\s\S]*?)$/i);
+
+      if (frontMatch && backMatch) {
+        const front = frontMatch[1]
+          .trim()
+          .replace(/^\*\*|\*\*$/g, '')
+          .trim();
+        const back = backMatch[1]
+          .trim()
+          // Aufzählungspunkte sauber halten
+          .replace(/^- /gm, '• ');
+
+        if (front && back) {
+          cards.push({ front, back, flipped: false });
+        }
+      }
+    }
+
+    return cards.length > 0 ? cards : null;
+  }
+
+  flipCard(msg: Message, index: number): void {
+    if (msg.flashcards) {
+      msg.flashcards[index].flipped = !msg.flashcards[index].flipped;
+      this.cdr.detectChanges();
+    }
+  }
+
   sendMessage(): void {
     if (!this.userInput.trim()) return;
     if (!this.selectedCourse) {
@@ -83,32 +130,34 @@ export class ChatComponent implements OnInit {
       return;
     }
 
-    // User-Nachricht in den Chat aufnehmen
     this.messages.push({ text: this.userInput, sender: 'user' });
     const currentInput = this.userInput;
     this.userInput = '';
     this.isLoading = true;
 
-    // User-Nachricht in den Chat aufnehmen
     this.chatService
-      .sendMessage(
-        currentInput,
-        this.selectedCourse.code,
-        this.selectedMode,
-        this.sessionId, // ← Session-ID mitschicken
-      )
+      .sendMessage(currentInput, this.selectedCourse.code, this.selectedMode, this.sessionId)
       .subscribe({
         next: (res) => {
-          // Session-ID merken (kommt vom Backend - bei erster Frage neu, danach gleich)
           if (res.session_id) {
             this.sessionId = res.session_id;
           }
 
-          this.messages.push({
+          // Versuchen Lernkarten zu parsen
+          const flashcards = this.parseFlashcards(res.reply);
+
+          const botMsg: Message = {
             text: res.reply,
             sender: 'bot',
             sources: res.sources,
-          });
+          };
+
+          if (flashcards) {
+            botMsg.flashcards = flashcards;
+            botMsg.isFlashcardMessage = true;
+          }
+
+          this.messages.push(botMsg);
           this.isLoading = false;
           this.cdr.detectChanges();
         },
@@ -120,7 +169,7 @@ export class ChatComponent implements OnInit {
             sources: [],
           });
           this.isLoading = false;
-          this.cdr.detectChanges(); // 🔧 FIX
+          this.cdr.detectChanges();
         },
       });
   }

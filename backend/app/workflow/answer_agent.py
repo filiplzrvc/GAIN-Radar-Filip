@@ -182,37 +182,64 @@ def _generate_llm_answer(state: WorkflowState, with_warning: bool = False) -> st
     """
     Ruft das LLM auf, um eine Antwort aus dem prepared_context zu erzeugen.
     
-    Baut einen dynamischen System-Prompt mit der erkannten Sprache,
-    und fügt den Konversations-Verlauf in den User-Input ein.
+    Wählt je nach state.mode den passenden didaktischen Prompt:
+    - quiz     → QUIZ_SYSTEM_PROMPT
+    - flashcard → FLASHCARD_SYSTEM_PROMPT  
+    - summary  → SUMMARY_SYSTEM_PROMPT
+    - tutor    → ANSWER_SYSTEM_PROMPT (Standard)
     """
+    from app.core.prompts import (
+        QUIZ_SYSTEM_PROMPT,
+        FLASHCARD_SYSTEM_PROMPT,
+        SUMMARY_SYSTEM_PROMPT,
+        ANSWER_SYSTEM_PROMPT
+    )
+
     # Sprache dynamisch bestimmen
     language = state.language or "de"
     language_map = {"de": "German", "en": "English"}
     language_name = language_map.get(language, f"the language with ISO code '{language}'")
-    
-    # Dynamischen System-Prompt mit Sprach-Regel bauen
-    dynamic_system = (
+
+    # Sprach-Regel die vor jeden Prompt gesetzt wird
+    language_rule = (
         f"CRITICAL LANGUAGE RULE: You MUST respond ONLY in {language_name}. "
         f"This is non-negotiable. Do NOT respond in any other language.\n\n"
-        + ANSWER_SYSTEM_PROMPT
     )
-    
+
+    # Richtigen Prompt je nach Modus wählen
+    mode = state.mode or "tutor"
+
+    if mode == "quiz":
+        base_prompt = QUIZ_SYSTEM_PROMPT
+        state.log("AntwortAgent", "📝 Nutze Quiz-Prompt")
+    elif mode == "flashcard":
+        base_prompt = FLASHCARD_SYSTEM_PROMPT
+        state.log("AntwortAgent", "🃏 Nutze Flashcard-Prompt")
+    elif mode == "summary":
+        base_prompt = SUMMARY_SYSTEM_PROMPT
+        state.log("AntwortAgent", "📋 Nutze Summary-Prompt")
+    else:
+        base_prompt = ANSWER_SYSTEM_PROMPT
+        state.log("AntwortAgent", "🎓 Nutze Tutor-Prompt")
+
+    dynamic_system = language_rule + base_prompt
+
     dynamic_prompt = ChatPromptTemplate.from_messages([
         ("system", dynamic_system),
         ("human", "{user_input}")
     ])
-    
+
     chain = dynamic_prompt | answer_llm | StrOutputParser()
-    
-    # User-Input zusammenbauen 
+
+    # User-Input zusammenbauen
     user_input_parts = []
-    
+
     # Konversations-Verlauf einfügen falls vorhanden
     history_text = _format_history_for_prompt(state.conversation_history)
     if history_text:
         user_input_parts.append(history_text)
         user_input_parts.append("")
-    
+
     # Warnung bei insufficient Kontext
     if with_warning:
         user_input_parts.append(
@@ -220,7 +247,7 @@ def _generate_llm_answer(state: WorkflowState, with_warning: bool = False) -> st
             "Antworte nur, was wirklich belegbar ist, sonst sage es ehrlich.]"
         )
         user_input_parts.append("")
-    
+
     # Aktuelle Frage mit Sprach-Erinnerung
     user_input_parts.append(
         f"Aktuelle Frage ({language_name} only!): {state.user_question}"
@@ -228,16 +255,16 @@ def _generate_llm_answer(state: WorkflowState, with_warning: bool = False) -> st
     user_input_parts.append(
         f"[REMINDER: Your entire response MUST be in {language_name}. {language_name} only.]"
     )
-    
+
     full_user_input = "\n".join(user_input_parts)
-    
+
     return chain.invoke(
-    {
-        "context": state.prepared_context or "",
-        "user_input": full_user_input
-    },
-    config={"run_name": "3. Antwort-Generierung"} 
-)
+        {
+            "context": state.prepared_context or "",
+            "user_input": full_user_input
+        },
+        config={"run_name": f"3. Antwort-Generierung ({mode})"}
+    )
 
 def _handle_llm_answer(state: WorkflowState, with_warning: bool = False) -> None:
     """
