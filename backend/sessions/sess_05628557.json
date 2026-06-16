@@ -1,0 +1,28 @@
+{
+  "session_id": "sess_05628557",
+  "created_at": "2026-06-16T09:29:17.823481Z",
+  "course": "itsec",
+  "messages": [
+    {
+      "role": "user",
+      "text": "Fasse zusammen: Eine SQL-Injection entsteht, wenn Benutzereingaben ungeprüft in SQL-Abfragen eingebaut werden. Angreifer können dadurch eigene SQL-Befehle einschleusen. Schutz bieten unter anderem Prepared Statements, Eingabevalidierung und das Prinzip der geringsten Rechte.",
+      "timestamp": "2026-06-16T09:29:17.823481Z"
+    },
+    {
+      "role": "bot",
+      "text": "**Kernbotschaft:** Eine SQL-Injection tritt auf, wenn Benutzereingaben ohne Prüfung in SQL-Abfragen integriert werden, was Angreifern ermöglicht, eigene SQL-Befehle einzuschleusen. Schutzmaßnahmen umfassen die Verwendung von Prepared Statements, Eingabevalidierung und das Prinzip der geringsten Rechte.\n\n**Wichtigste Punkte:**\n- SQL-Injection durch ungeprüfte Benutzereingaben.\n- Angreifer können eigene SQL-Befehle ausführen.\n- Schutz durch Prepared Statements und Eingabevalidierung.\n- Anwendung des Prinzips der geringsten Rechte.",
+      "sources": [
+        "01_Introduction.pdf (S. 25)",
+        "02_Cryptography.pdf (S. 7)",
+        "04_MFA_AccessControl.pdf (S. 18)",
+        "04_MFA_AccessControl.pdf (S. 20)",
+        "04_MFA_AccessControl.pdf (S. 25)",
+        "04_MFA_AccessControl.pdf (S. 30)",
+        "04_MFA_AccessControl.pdf (S. 6)",
+        "06_Firewalls.pdf (S. 19)"
+      ],
+      "timestamp": "2026-06-16T09:29:17.823481Z"
+    }
+  ],
+  "last_updated": "2026-06-16T09:29:17.823481Z"
+}

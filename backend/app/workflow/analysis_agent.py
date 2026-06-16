@@ -76,7 +76,7 @@ def run_analysis_agent(state: WorkflowState) -> WorkflowState:
         # LLM aufrufen mit sauberer run_name Übergabe im invoke
         raw_response = chain.invoke(
             {"user_input": full_input},
-            config={"run_name": "🧠 1. Analyse-Agent"} 
+            config={"run_name": "1. Analyse-Agent"} 
         )
         
         # Markdown-Codeblöcke ggf. wegstrippen
@@ -99,7 +99,7 @@ def run_analysis_agent(state: WorkflowState) -> WorkflowState:
         state.mode = ai_mode
         
         if ai_mode != "tutor":
-            state.log("AnfrageanalyseAgent", f"🤖 Didaktor erkennt Skill-Wunsch: Aktiviere '{ai_mode}'-Modus!")
+            state.log("AnfrageanalyseAgent", f"Didaktor erkennt Skill-Wunsch: Aktiviere '{ai_mode}'-Modus!")
         
         state.decisions.off_topic = result.get("off_topic", False)
         state.decisions.clarification_needed = result.get("clarification_needed", False)

@@ -1,0 +1,27 @@
+{
+  "session_id": "sess_f16a4425",
+  "created_at": "2026-06-16T09:00:57.541301Z",
+  "course": "swen",
+  "messages": [
+    {
+      "role": "user",
+      "text": "Fasse die wichtigsten Punkte zusammen: SOLID ist eine Sammlung von fünf Prinzipien im objektorientierten Softwaredesign. Sie sollen Code wartbarer, verständlicher und erweiterbarer machen. Die Prinzipien heißen Single Responsibility, Open-Closed, Liskov Substitution, Interface Segregation und Dependency Inversion.",
+      "timestamp": "2026-06-16T09:00:57.541301Z"
+    },
+    {
+      "role": "bot",
+      "text": "**Kernbotschaft:** SOLID umfasst fünf Prinzipien, die darauf abzielen, objektorientierten Code wartbarer, verständlicher und erweiterbarer zu gestalten. Diese Prinzipien sind: Single Responsibility, Open-Closed, Liskov Substitution, Interface Segregation und Dependency Inversion.\n\n**Wichtigste Punkte:**\n- Single Responsibility Principle: Jede Klasse sollte nur eine Verantwortung haben.\n- Open-Closed Principle: Software sollte offen für Erweiterungen, aber geschlossen für Modifikationen sein.\n- Liskov Substitution Principle: Subtypen sollten ohne Probleme anstelle ihrer Basistypen verwendet werden können.\n- Interface Segregation Principle: Clients sollten nicht gezwungen werden, von Schnittstellen abhängig zu sein, die sie nicht nutzen.\n- Dependency Inversion Principle: Abhängigkeiten sollten von Abstraktionen und nicht von konkreten Implementierungen abhängen.",
+      "sources": [
+        "06_Architecture.pdf (S. 6)",
+        "07_SRP.pdf (S. 1)",
+        "07_SRP.pdf (S. 2)",
+        "07_SRP.pdf (S. 21)",
+        "07_SRP.pdf (S. 4)",
+        "07_SRP.pdf (S. 5)",
+        "07_SRP.pdf (S. 8)"
+      ],
+      "timestamp": "2026-06-16T09:00:57.541301Z"
+    }
+  ],
+  "last_updated": "2026-06-16T09:00:57.541301Z"
+}

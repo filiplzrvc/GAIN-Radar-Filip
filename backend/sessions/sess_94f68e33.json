@@ -1,0 +1,28 @@
+{
+  "session_id": "sess_94f68e33",
+  "created_at": "2026-06-15T23:03:40.713391Z",
+  "course": "itsec",
+  "messages": [
+    {
+      "role": "user",
+      "text": "Was ist der Unterschied zwischen symmetrischer und asymmetrischer Verschlüsselung?",
+      "timestamp": "2026-06-15T23:03:40.713391Z"
+    },
+    {
+      "role": "bot",
+      "text": "Der Unterschied zwischen symmetrischer und asymmetrischer Verschlüsselung liegt in der Verwendung der Schlüssel. Bei der symmetrischen Verschlüsselung wird derselbe Schlüssel sowohl zum Verschlüsseln als auch zum Entschlüsseln einer Nachricht verwendet. Dies wird in Quelle 6 beschrieben. \n\nIm Gegensatz dazu verwendet die asymmetrische Verschlüsselung zwei verschiedene Schlüssel: einen öffentlichen Schlüssel zum Verschlüsseln und einen privaten Schlüssel zum Entschlüsseln. Dies wird in Quelle 1 erläutert. \n\nZusammenfassend lässt sich sagen, dass die symmetrische Verschlüsselung schneller und effizienter ist, während die asymmetrische Verschlüsselung das Problem der Schlüsselverteilung löst, jedoch langsamer und ressourcenintensiver ist (Quelle 5). Möchtest du mehr Informationen zu einem bestimmten Aspekt?",
+      "sources": [
+        "02_Cryptography.pdf (S. 16)",
+        "02_Cryptography.pdf (S. 17)",
+        "02_Cryptography.pdf (S. 18)",
+        "02_Cryptography.pdf (S. 19)",
+        "02_Cryptography.pdf (S. 22)",
+        "02_Cryptography.pdf (S. 23)",
+        "02_Cryptography.pdf (S. 24)",
+        "02_Cryptography.pdf (S. 29)"
+      ],
+      "timestamp": "2026-06-15T23:03:40.713391Z"
+    }
+  ],
+  "last_updated": "2026-06-15T23:03:40.713391Z"
+}

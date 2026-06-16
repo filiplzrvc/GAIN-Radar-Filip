@@ -1,0 +1,19 @@
+{
+  "session_id": "sess_f4fdc6ac",
+  "created_at": "2026-06-16T09:28:19.971550Z",
+  "course": "itsec",
+  "messages": [
+    {
+      "role": "user",
+      "text": "Explain Public Key Infrastructure.",
+      "timestamp": "2026-06-16T09:28:19.971550Z"
+    },
+    {
+      "role": "bot",
+      "text": "I couldn't find any information about your question in the course material. Maybe it doesn't fit this subject – would you like to ask in a different course?",
+      "sources": [],
+      "timestamp": "2026-06-16T09:28:19.971550Z"
+    }
+  ],
+  "last_updated": "2026-06-16T09:28:19.971550Z"
+}

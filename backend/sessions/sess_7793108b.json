@@ -1,0 +1,19 @@
+{
+  "session_id": "sess_7793108b",
+  "created_at": "2026-06-16T09:28:02.076272Z",
+  "course": "itsec",
+  "messages": [
+    {
+      "role": "user",
+      "text": "Erkläre mir agile Softwareentwicklung mit Scrum.",
+      "timestamp": "2026-06-16T09:28:02.076272Z"
+    },
+    {
+      "role": "bot",
+      "text": "Im Kursmaterial finde ich zu deiner Frage leider keine Informationen. Vielleicht passt sie nicht zu diesem Fach – möchtest du sie in einem anderen Fach stellen?",
+      "sources": [],
+      "timestamp": "2026-06-16T09:28:02.076272Z"
+    }
+  ],
+  "last_updated": "2026-06-16T09:28:02.076272Z"
+}

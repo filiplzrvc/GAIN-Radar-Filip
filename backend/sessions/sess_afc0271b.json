@@ -1,0 +1,28 @@
+{
+  "session_id": "sess_afc0271b",
+  "created_at": "2026-06-16T09:01:55.367327Z",
+  "course": "itsec",
+  "messages": [
+    {
+      "role": "user",
+      "text": "Erstelle Lernkarten: Public Key Infrastructure besteht aus digitalen Zertifikaten, Zertifizierungsstellen und Schlüsselpaaren. Sie hilft dabei, Identitäten zu prüfen und sichere Kommunikation mit Public-Key-Kryptografie zu ermöglichen.",
+      "timestamp": "2026-06-16T09:01:55.367327Z"
+    },
+    {
+      "role": "bot",
+      "text": "**KARTENVORDERSEITE (Frage / Konzept):**\nWas ist die Public Key Infrastructure (PKI)?\n\n**KARTENRÜCKSEITE (Erklärung):**\n- PKI besteht aus digitalen Zertifikaten, Zertifizierungsstellen und Schlüsselpaaren.\n- Sie hilft dabei, Identitäten zu prüfen.\n- Sie ermöglicht sichere Kommunikation mit Public-Key-Kryptografie.",
+      "sources": [
+        "03_Hashing_PKI.pdf (S. 1)",
+        "03_Hashing_PKI.pdf (S. 13)",
+        "03_Hashing_PKI.pdf (S. 15)",
+        "03_Hashing_PKI.pdf (S. 16)",
+        "03_Hashing_PKI.pdf (S. 17)",
+        "03_Hashing_PKI.pdf (S. 20)",
+        "03_Hashing_PKI.pdf (S. 3)",
+        "03_Hashing_PKI.pdf (S. 6)"
+      ],
+      "timestamp": "2026-06-16T09:01:55.367327Z"
+    }
+  ],
+  "last_updated": "2026-06-16T09:01:55.367327Z"
+}

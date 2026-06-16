@@ -1,0 +1,19 @@
+{
+  "session_id": "sess_ee03f671",
+  "created_at": "2026-06-16T09:39:01.900666Z",
+  "course": "swen",
+  "messages": [
+    {
+      "role": "user",
+      "text": "Hallo GAIN-Radar!",
+      "timestamp": "2026-06-16T09:39:01.900666Z"
+    },
+    {
+      "role": "bot",
+      "text": "Deine Frage ist mir noch zu unklar. Kannst du sie etwas konkreter formulieren? Zum Beispiel: Welches Thema interessiert dich, oder zu welchem Konzept möchtest du mehr wissen?",
+      "sources": [],
+      "timestamp": "2026-06-16T09:39:01.900666Z"
+    }
+  ],
+  "last_updated": "2026-06-16T09:39:01.900666Z"
+}

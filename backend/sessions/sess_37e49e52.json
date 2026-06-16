@@ -1,0 +1,19 @@
+{
+  "session_id": "sess_37e49e52",
+  "created_at": "2026-06-16T09:00:14.028501Z",
+  "course": "itsec",
+  "messages": [
+    {
+      "role": "user",
+      "text": "Kannst du mir ein Code-Beispiel dafür geben?",
+      "timestamp": "2026-06-16T09:00:14.028501Z"
+    },
+    {
+      "role": "bot",
+      "text": "Deine Frage ist mir noch zu unklar. Kannst du sie etwas konkreter formulieren? Zum Beispiel: Welches Thema interessiert dich, oder zu welchem Konzept möchtest du mehr wissen?",
+      "sources": [],
+      "timestamp": "2026-06-16T09:00:14.028501Z"
+    }
+  ],
+  "last_updated": "2026-06-16T09:00:14.028501Z"
+}

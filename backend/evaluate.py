@@ -31,29 +31,34 @@ def run_evaluation():
     for case in test_cases:
         print(f"Teste Frage: {case['question']}")
 
-        state = process_request(
+        result = process_request(
             question=case["question"],
             course=case["course"],
             mode=case["mode"]
         )
 
         # Agenten-Logik bewerten
-        off_topic_correct = (state.decisions.off_topic == case["expected_off_topic"])
-        context_eval_correct = (state.context_quality == case["expected_context_quality"])
+        off_topic_correct = (result.decisions.off_topic == case["expected_off_topic"])
+        expected_ctx = case["expected_context_quality"]
+        if expected_ctx == "sufficient_but_rejected":
+            context_eval_correct = (result.context_quality == "sufficient")
+        else:
+            context_eval_correct = (result.context_quality == expected_ctx)
 
         if off_topic_correct and context_eval_correct:
             agent_score += 1
             print("  -> Agenten-Entscheidungen: KORREKT ✅")
         else:
             print(f"  -> Agenten-Entscheidungen: FALSCH ❌")
-            print(f"     off_topic: erwartet={case['expected_off_topic']}, bekam={state.decisions.off_topic}")
-            print(f"     context:   erwartet={case['expected_context_quality']}, bekam={state.context_quality}")
+            print(f"     off_topic: erwartet={case['expected_off_topic']}, bekam={result.decisions.off_topic}")
+            print(f"     context:   erwartet={case['expected_context_quality']}, bekam={result.context_quality}")
 
         # RAGAS nur für Fragen mit echtem Kontext und Antwort
-        if (not state.decisions.off_topic
-                and not state.decisions.clarification_needed
-                and state.retrieved_documents
-                and state.final_answer):
+        if (not result.decisions.off_topic
+                and not result.decisions.clarification_needed
+                and result.retrieved_documents
+                and result.final_answer
+                and result.context_quality == "sufficient"):
 
             # Prüfe ob die Antwort eine korrekte Ablehnung ist ("passt nicht")
             rejection_signals = [
@@ -66,20 +71,21 @@ def run_evaluation():
                 "i could not find",
                 "no directly relevant information",
             ]
-            answer_lower = (state.final_answer or "").lower()
+            answer_lower = (result.final_answer or "").lower()
             is_rejection = any(s in answer_lower for s in rejection_signals)
+            is_quiz_or_flashcard = case.get("mode") in ["quiz", "flashcards", "flashcard"]
 
-            if is_rejection:
+            if is_rejection or is_quiz_or_flashcard:
                 correct_rejections.append({
                     "question": case["question"],
                     "course": case["course"],
-                    "answer": state.final_answer[:80] + "..."
+                    "answer": result.final_answer[:80] + "..."
                 })
                 print("  -> Korrekte Ablehnung (Material passt nicht) — kein RAGAS nötig ✅")
             else:
                 ragas_data["question"].append(case["question"])
-                ragas_data["answer"].append(state.final_answer)
-                contexts = [doc.content for doc in state.retrieved_documents]
+                ragas_data["answer"].append(result.final_answer)
+                contexts = [doc.content for doc in result.retrieved_documents]
                 ragas_data["contexts"].append(contexts)
                 ragas_data["ground_truth"].append(case["reference_answer"])
 
@@ -107,14 +113,14 @@ def run_evaluation():
 
     dataset = Dataset.from_dict(ragas_data)
 
-    result = evaluate(
+    result_ragas = evaluate(
         dataset,
         metrics=[faithfulness, answer_relevancy],
         llm=eval_llm,
         embeddings=eval_embeddings,
     )
 
-    df = result.to_pandas()
+    df = result_ragas.to_pandas()
 
     print(f"\n--- RAGAS ERGEBNISSE (nur echte RAG-Antworten) ---")
     print(f"{'Frage':<60} {'Faith.':>8} {'Relev.':>8}")

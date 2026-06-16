@@ -1,0 +1,28 @@
+{
+  "session_id": "sess_116322b2",
+  "created_at": "2026-06-15T23:05:01.622412Z",
+  "course": "aief",
+  "messages": [
+    {
+      "role": "user",
+      "text": "Erstelle Lernkarten: Ein Decision Tree ist ein Modell, das Entscheidungen baumartig darstellt. Jeder innere Knoten enthält eine Bedingung, jede Kante steht für ein Ergebnis dieser Bedingung und jedes Blatt enthält eine Vorhersage oder Klasse.",
+      "timestamp": "2026-06-15T23:05:01.622412Z"
+    },
+    {
+      "role": "bot",
+      "text": "**KARTENVORDERSEITE (Frage / Konzept):**\nWas ist ein Entscheidungsbaum?\n\n**KARTENRÜCKSEITE (Erklärung):**\n- Ein Entscheidungsbaum stellt Entscheidungen baumartig dar.\n- Jeder innere Knoten enthält eine Bedingung.\n- Jede Kante steht für ein Ergebnis dieser Bedingung und jedes Blatt enthält eine Vorhersage oder Klasse.",
+      "sources": [
+        "01_Grundlagen.pdf (S. 7)",
+        "02_Logik.pdf (S. 16)",
+        "03_MaschinellesLernen.pdf (S. 17)",
+        "03_MaschinellesLernen.pdf (S. 18)",
+        "03_MaschinellesLernen.pdf (S. 19)",
+        "03_MaschinellesLernen.pdf (S. 20)",
+        "03_MaschinellesLernen.pdf (S. 21)",
+        "03_MaschinellesLernen.pdf (S. 22)"
+      ],
+      "timestamp": "2026-06-15T23:05:01.622412Z"
+    }
+  ],
+  "last_updated": "2026-06-15T23:05:01.622412Z"
+}

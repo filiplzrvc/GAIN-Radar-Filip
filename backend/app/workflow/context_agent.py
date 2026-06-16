@@ -11,11 +11,36 @@ Aufgabe:
 from langsmith import traceable
 from app.workflow.state import WorkflowState
 
+COURSE_TOPIC_HINTS = {
+    "aief": ["machine learning", "neural network", "ki", "künstliche intelligenz",
+             "algorithmus", "training", "modell", "klassifikation", "deep learning",
+             "overfitting", "clustering", "regression", "backpropagation"],
+    "swen": ["software", "design pattern", "mvc", "solid", "agile", "scrum",
+             "refactoring", "testing", "continuous integration", "architektur",
+             "objektorientiert", "clean code", "repository", "deployment"],
+    "itsec": ["sicherheit", "security", "verschlüsselung", "angriff", "firewall",
+              "authentifizierung", "kryptographie", "vulnerability", "phishing",
+              "sql injection", "xss", "penetration", "zertifikat", "schlüssel",
+              "cryptography", "encryption", "certificate", "public key", "pki"],
+}
 
 # Schwellwerte für Qualitätsbewertung
 MIN_CHUNK_LENGTH = 30
 MIN_DOCS_FOR_GOOD_CONTEXT = 2
 MIN_TOTAL_CONTEXT_LENGTH = 300
+
+
+def _is_course_relevant(state: WorkflowState) -> bool:
+    """Prüft ob die Frage thematisch zum Kurs passt."""
+    course = state.course
+    if course not in COURSE_TOPIC_HINTS:
+        return True
+
+    question_lower = state.user_question.lower()
+    topics_lower = [t.lower() for t in (state.topics or [])]
+    combined = question_lower + " " + " ".join(topics_lower)
+
+    return any(kw in combined for kw in COURSE_TOPIC_HINTS[course])
 
 
 @traceable(name="Kontext-Filter")
@@ -60,6 +85,13 @@ def prepare_context(state: WorkflowState) -> WorkflowState:
         quality = "sufficient"
         reason = f"{len(deduplicated)} Dokumente / {total_length} Zeichen"
         state.decisions.context_sufficient = True
+
+    # Kurs-Relevanz prüfen — auch wenn Chunks gefunden wurden
+    if quality == "sufficient" and not _is_course_relevant(state):
+        quality = "none"
+        reason = "Thema passt nicht zum Kurs"
+        state.decisions.context_sufficient = False
+        state.log("ContextAgent", "Thema passt nicht zum Kurs → Qualität auf 'none' gesetzt")
 
     # Strukturierten Kontext-Text bauen
     context_parts = []

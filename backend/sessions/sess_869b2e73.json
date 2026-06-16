@@ -1,0 +1,28 @@
+{
+  "session_id": "sess_869b2e73",
+  "created_at": "2026-06-15T23:05:20.588998Z",
+  "course": "aief",
+  "messages": [
+    {
+      "role": "user",
+      "text": "Erstelle ein Quiz: Overfitting passiert, wenn ein Modell die Trainingsdaten zu stark auswendig lernt. Dadurch erreicht es oft gute Ergebnisse auf Trainingsdaten, aber schlechte Ergebnisse auf neuen Daten. Regularisierung, mehr Daten oder einfachere Modelle können helfen.",
+      "timestamp": "2026-06-15T23:05:20.588998Z"
+    },
+    {
+      "role": "bot",
+      "text": "Frage: Was beschreibt das Phänomen des Overfitting im Kontext des maschinellen Lernens?\n\nA) Das Modell hat Schwierigkeiten, die Trainingsdaten zu lernen.  \nB) Das Modell lernt die Trainingsdaten zu gut und generalisiert schlecht auf neue Daten.  \nC) Das Modell verwendet keine Trainingsdaten.  \nD) Das Modell hat eine zu geringe Fehlerrate auf den Testdaten.  \n\nBitte wähle die richtige Antwort aus!",
+      "sources": [
+        "03_MaschinellesLernen.pdf (S. 11)",
+        "03_MaschinellesLernen.pdf (S. 22)",
+        "03_MaschinellesLernen.pdf (S. 29)",
+        "03_MaschinellesLernen.pdf (S. 38)",
+        "04_NeuronaleNetze.pdf (S. 21)",
+        "04_NeuronaleNetze.pdf (S. 22)",
+        "04_NeuronaleNetze.pdf (S. 43)",
+        "04_NeuronaleNetze.pdf (S. 8)"
+      ],
+      "timestamp": "2026-06-15T23:05:20.588998Z"
+    }
+  ],
+  "last_updated": "2026-06-15T23:05:20.588998Z"
+}

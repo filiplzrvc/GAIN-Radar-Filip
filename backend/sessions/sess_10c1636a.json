@@ -1,0 +1,19 @@
+{
+  "session_id": "sess_10c1636a",
+  "created_at": "2026-06-16T09:00:15.530890Z",
+  "course": "aief",
+  "messages": [
+    {
+      "role": "user",
+      "text": "Hilfe, ich verstehe das Skript nicht.",
+      "timestamp": "2026-06-16T09:00:15.530890Z"
+    },
+    {
+      "role": "bot",
+      "text": "Deine Frage ist mir noch zu unklar. Kannst du sie etwas konkreter formulieren? Zum Beispiel: Welches Thema interessiert dich, oder zu welchem Konzept möchtest du mehr wissen?",
+      "sources": [],
+      "timestamp": "2026-06-16T09:00:15.530890Z"
+    }
+  ],
+  "last_updated": "2026-06-16T09:00:15.530890Z"
+}

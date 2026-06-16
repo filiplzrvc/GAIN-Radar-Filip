@@ -1,0 +1,28 @@
+{
+  "session_id": "sess_f7a7b90a",
+  "created_at": "2026-06-15T23:04:57.271968Z",
+  "course": "aief",
+  "messages": [
+    {
+      "role": "user",
+      "text": "Fasse die wichtigsten Firewall-Regeln zusammen.",
+      "timestamp": "2026-06-15T23:04:57.271968Z"
+    },
+    {
+      "role": "bot",
+      "text": "**Kernbotschaft:** Firewall-Regeln sind entscheidend für die Netzwerksicherheit, da sie den Datenverkehr kontrollieren und unerwünschte Zugriffe verhindern. Die wichtigsten Regeln umfassen das Zulassen oder Blockieren von spezifischen IP-Adressen, Ports und Protokollen.\n\n**Wichtigste Punkte:**\n- Erlauben oder blockieren von eingehendem und ausgehendem Datenverkehr.\n- Definition von Regeln basierend auf IP-Adressen, Ports und Protokollen.\n- Überwachung und Protokollierung von verdächtigem Datenverkehr.\n- Regelmäßige Aktualisierung und Anpassung der Firewall-Regeln zur Reaktion auf neue Bedrohungen.",
+      "sources": [
+        "01_Grundlagen.pdf (S. 2)",
+        "02_Logik.pdf (S. 3)",
+        "03_MaschinellesLernen.pdf (S. 36)",
+        "04_NeuronaleNetze.pdf (S. 2)",
+        "04_NeuronaleNetze.pdf (S. 3)",
+        "04_NeuronaleNetze.pdf (S. 38)",
+        "04_NeuronaleNetze.pdf (S. 39)",
+        "04_NeuronaleNetze.pdf (S. 40)"
+      ],
+      "timestamp": "2026-06-15T23:04:57.271968Z"
+    }
+  ],
+  "last_updated": "2026-06-15T23:04:57.271968Z"
+}

@@ -1,0 +1,48 @@
+{
+  "session_id": "sess_a076814c",
+  "created_at": "2026-06-16T09:04:56.694409Z",
+  "course": "aief",
+  "messages": [
+    {
+      "role": "user",
+      "text": "Erkläre mit Overfitting",
+      "timestamp": "2026-06-16T09:04:56.694409Z"
+    },
+    {
+      "role": "bot",
+      "text": "Overfitting, oder Überanpassung, tritt auf, wenn ein Modell zu stark an die Trainingsdaten angepasst wird. Dies führt dazu, dass das Modell zwar auf den Trainingsdaten sehr gut funktioniert, jedoch auf neuen, unbekannten Daten schlecht abschneidet. Im Kontext der Entscheidungsbäume wird erwähnt, dass die Fehlerrate auf den Trainingsdaten monoton abnimmt mit der Größe des Baumes, jedoch ab einer bestimmten Anzahl von Knoten, hier 55, die Fehlerrate wieder steigt. Dies ist ein typisches Zeichen für Overfitting. Eine mögliche Lösung besteht darin, das Lernen bei 55 Knoten abzubrechen, um die Überanpassung zu vermeiden.",
+      "sources": [
+        "03_MaschinellesLernen.pdf (S. 12)",
+        "03_MaschinellesLernen.pdf (S. 16)",
+        "03_MaschinellesLernen.pdf (S. 21)",
+        "03_MaschinellesLernen.pdf (S. 22)",
+        "03_MaschinellesLernen.pdf (S. 38)",
+        "04_NeuronaleNetze.pdf (S. 21)",
+        "04_NeuronaleNetze.pdf (S. 22)",
+        "04_NeuronaleNetze.pdf (S. 8)"
+      ],
+      "timestamp": "2026-06-16T09:04:56.694409Z"
+    },
+    {
+      "role": "user",
+      "text": "Erstelle mir 10 Lernkarten dazu",
+      "timestamp": "2026-06-16T09:05:57.373972Z"
+    },
+    {
+      "role": "bot",
+      "text": "**KARTENVORDERSEITE (Frage / Konzept):**\nWas ist Overfitting?\n\n**KARTENRÜCKSEITE (Erklärung):**\n- Overfitting, oder Überanpassung, tritt auf, wenn ein Modell zu stark an die Trainingsdaten angepasst wird.\n- Das Modell funktioniert gut auf den Trainingsdaten, aber schlecht auf neuen, unbekannten Daten.\n- Ein typisches Zeichen ist, dass die Fehlerrate auf den Trainingsdaten abnimmt, aber ab einer bestimmten Größe des Modells (z.B. 55 Knoten bei Entscheidungsbäumen) wieder steigt.\n\n---\n\n**KARTENVORDERSEITE (Frage / Konzept):**\nWie beeinflusst die Größe des Entscheidungsbaums die Fehlerrate?\n\n**KARTENRÜCKSEITE (Erklärung):**\n- Die Fehlerrate auf den Trainingsdaten nimmt monoton ab mit der Größe des Baumes.\n- Ab einer bestimmten Anzahl von Knoten kann die Fehlerrate jedoch wieder steigen.\n- Dies ist ein Indikator für Overfitting.\n\n---\n\n**KARTENVORDERSEITE (Frage / Konzept):**\nWas sind mögliche Lösungen für Overfitting?\n\n**KARTENRÜCKSEITE (Erklärung):**\n- Eine Lösung besteht darin, das Lernen bei einer bestimmten Anzahl von Knoten abzubrechen.\n- Dies verhindert, dass das Modell zu komplex wird und an die Trainingsdaten überangepasst wird.\n- Weitere Methoden sind Regularisierung und Cross-Validation.\n\n---\n\n**KARTENVORDERSEITE (Frage / Konzept):**\nWas sind die Symptome von Overfitting?\n\n**KARTENRÜCKSEITE (Erklärung):**\n- Hohe Genauigkeit auf Trainingsdaten, aber niedrige Genauigkeit auf Testdaten.\n- Fehlerrate auf Trainingsdaten sinkt, während sie auf Testdaten steigt.\n- Komplexität des Modells übersteigt die notwendige Kapazität für die Daten.\n\n---\n\n**KARTENVORDERSEITE (Frage / Konzept):**\nWas ist der Unterschied zwischen Overfitting und Underfitting?\n\n**KARTENRÜCKSEITE (Erklärung):**\n- Overfitting: Modell ist zu komplex und passt sich zu stark an die Trainingsdaten an.\n- Underfitting: Modell ist zu einfach und kann die Muster in den Trainingsdaten nicht erfassen.\n- Beide führen zu schlechten Vorhersagen auf neuen Daten.\n\n---\n\n**KARTENVORDERSEITE (Frage / Konzept):**\nWie kann man Overfitting bei Entscheidungsbäumen vermeiden?\n\n**KARTENRÜCKSEITE (Erklärung):**\n- Abbruch des Lernens bei einer bestimmten Anzahl von Knoten (z.B. 55 Knoten).\n- Verwendung von Pruning-Techniken, um unnötige Knoten zu entfernen.\n- Einsatz von Cross-Validation zur Überprüfung der Modellleistung.\n\n---\n\n**KARTENVORDERSEITE (Frage / Konzept):**\nWas ist Pruning bei Entscheidungsbäumen?\n\n**KARTENRÜCKSEITE (Erklärung):**\n- Pruning ist der Prozess, bei dem Knoten entfernt werden, um die Komplexität des Modells zu reduzieren.\n- Ziel ist es, Overfitting zu vermeiden und die Generalisierungsfähigkeit zu verbessern.\n- Es wird oft nach dem Training des Modells durchgeführt.\n\n---\n\n**KARTENVORDERSEITE (Frage / Konzept):**\nWas ist die Rolle von Trainings- und Testdaten?\n\n**KARTENRÜCKSEITE (Erklärung):**\n- Trainingsdaten werden verwendet, um das Modell zu trainieren und die Parameter anzupassen.\n- Testdaten dienen zur Validierung der Modellleistung und zur Überprüfung auf Overfitting.\n- Eine gute Trennung zwischen beiden ist entscheidend für die Modellbewertung.\n\n---\n\n**KARTENVORDERSEITE (Frage / Konzept):**\nWas sind die Folgen von Overfitting?\n\n**KARTENRÜCKSEITE (Erklärung):**\n- Das Modell hat eine schlechte Leistung auf neuen, unbekannten Daten.\n- Es kann zu falschen Vorhersagen und Entscheidungen führen.\n- Erhöhte Komplexität kann zu längeren Trainingszeiten und höherem Ressourcenverbrauch führen.\n\n---\n\n**KARTENVORDERSEITE (Frage / Konzept):**\nWie kann man die Modellkomplexität steuern?\n\n**KARTENRÜCKSEITE (Erklärung):**\n- Durch Auswahl geeigneter Hyperparameter, die die Tiefe oder Anzahl der Knoten eines Entscheidungsbaums steuern.\n- Verwendung von Regularisierungstechniken, um die Gewichtung der Parameter zu beeinflussen.\n- Anwendung von Cross-Validation zur Optimierung der Modellparameter.",
+      "sources": [
+        "03_MaschinellesLernen.pdf (S. 16)",
+        "03_MaschinellesLernen.pdf (S. 20)",
+        "03_MaschinellesLernen.pdf (S. 22)",
+        "03_MaschinellesLernen.pdf (S. 3)",
+        "03_MaschinellesLernen.pdf (S. 8)",
+        "04_NeuronaleNetze.pdf (S. 21)",
+        "04_NeuronaleNetze.pdf (S. 30)",
+        "04_NeuronaleNetze.pdf (S. 43)"
+      ],
+      "timestamp": "2026-06-16T09:05:57.373972Z"
+    }
+  ],
+  "last_updated": "2026-06-16T09:05:57.373972Z"
+}

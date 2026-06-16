@@ -1,0 +1,19 @@
+{
+  "session_id": "sess_7856f729",
+  "created_at": "2026-06-16T09:39:54.739305Z",
+  "course": "aief",
+  "messages": [
+    {
+      "role": "user",
+      "text": "Fasse die wichtigsten Firewall-Regeln zusammen.",
+      "timestamp": "2026-06-16T09:39:54.739305Z"
+    },
+    {
+      "role": "bot",
+      "text": "Im Kursmaterial finde ich zu deiner Frage leider keine Informationen. Vielleicht passt sie nicht zu diesem Fach – möchtest du sie in einem anderen Fach stellen?",
+      "sources": [],
+      "timestamp": "2026-06-16T09:39:54.739305Z"
+    }
+  ],
+  "last_updated": "2026-06-16T09:39:54.739305Z"
+}

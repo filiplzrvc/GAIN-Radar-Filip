@@ -211,16 +211,16 @@ def _generate_llm_answer(state: WorkflowState, with_warning: bool = False) -> st
 
     if mode == "quiz":
         base_prompt = QUIZ_SYSTEM_PROMPT
-        state.log("AntwortAgent", "📝 Nutze Quiz-Prompt")
+        state.log("AntwortAgent", "Nutze Quiz-Prompt")
     elif mode == "flashcard":
         base_prompt = FLASHCARD_SYSTEM_PROMPT
-        state.log("AntwortAgent", "🃏 Nutze Flashcard-Prompt")
+        state.log("AntwortAgent", "Nutze Flashcard-Prompt")
     elif mode == "summary":
         base_prompt = SUMMARY_SYSTEM_PROMPT
-        state.log("AntwortAgent", "📋 Nutze Summary-Prompt")
+        state.log("AntwortAgent", "Nutze Summary-Prompt")
     else:
         base_prompt = ANSWER_SYSTEM_PROMPT
-        state.log("AntwortAgent", "🎓 Nutze Tutor-Prompt")
+        state.log("AntwortAgent", "Nutze Tutor-Prompt")
 
     dynamic_system = language_rule + base_prompt
 

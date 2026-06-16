@@ -1,0 +1,19 @@
+{
+  "session_id": "sess_ffdb9524",
+  "created_at": "2026-06-16T09:04:27.935017Z",
+  "course": "aief",
+  "messages": [
+    {
+      "role": "user",
+      "text": "Erkläre mir Overfitting",
+      "timestamp": "2026-06-16T09:04:27.935017Z"
+    },
+    {
+      "role": "bot",
+      "text": "Im verfügbaren Kursmaterial finde ich zu deiner Frage keine direkt passenden Informationen. Möchtest du die Frage in einem anderen Fach stellen oder dein Thema präzisieren?",
+      "sources": [],
+      "timestamp": "2026-06-16T09:04:27.935017Z"
+    }
+  ],
+  "last_updated": "2026-06-16T09:04:27.935017Z"
+}
