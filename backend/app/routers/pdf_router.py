@@ -6,8 +6,6 @@ from fastapi.responses import FileResponse
 
 router = APIRouter()
 
-# pdf_router.py liegt in: backend/app/routers/pdf_router.py
-# data liegt in:      backend/app/data
 DATA_DIR = Path(__file__).resolve().parents[2] / "data"
 
 

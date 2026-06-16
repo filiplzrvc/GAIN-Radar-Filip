@@ -1,0 +1,48 @@
+{
+  "session_id": "sess_dc18d82e",
+  "created_at": "2026-06-16T10:05:56.090619Z",
+  "course": "aief",
+  "messages": [
+    {
+      "role": "user",
+      "text": "was ist overfitting",
+      "timestamp": "2026-06-16T10:05:56.090619Z"
+    },
+    {
+      "role": "bot",
+      "text": "Overfitting, oder Überanpassung, tritt auf, wenn ein Modell zu stark an die Trainingsdaten angepasst wird. Dies führt dazu, dass die Fehlerrate auf den Trainingsdaten zwar sinkt, die Fehlerrate auf den Testdaten jedoch wieder steigt. Ein Beispiel dafür ist, dass ab 55 Knoten die Fehlerrate wieder ansteigt. Um Overfitting zu vermeiden, kann man das Lernen bei einer bestimmten Anzahl von Knoten abbrechen.",
+      "sources": [
+        "03_MaschinellesLernen.pdf (S. 12)",
+        "03_MaschinellesLernen.pdf (S. 14)",
+        "03_MaschinellesLernen.pdf (S. 16)",
+        "03_MaschinellesLernen.pdf (S. 21)",
+        "03_MaschinellesLernen.pdf (S. 22)",
+        "03_MaschinellesLernen.pdf (S. 38)",
+        "04_NeuronaleNetze.pdf (S. 21)",
+        "04_NeuronaleNetze.pdf (S. 22)"
+      ],
+      "timestamp": "2026-06-16T10:05:56.090619Z"
+    },
+    {
+      "role": "user",
+      "text": "erstelle mir zu diesem Fach 10 Lernkarten",
+      "timestamp": "2026-06-16T10:06:44.091842Z"
+    },
+    {
+      "role": "bot",
+      "text": "**KARTENVORDERSEITE (Frage / Konzept):**  \nWas ist maschinelles Lernen?\n\n**KARTENRÜCKSEITE (Erklärung):**  \n- Verfahren des maschinellen Lernens und des Data Mining werden eingesetzt, um Analysen und Vorhersagen auf Basis von Echtdaten zu erstellen.  \n- Es gibt zwei Hauptarten: Überwachtes Lernen und Unüberwachtes Lernen.  \n- Ziel ist es, Muster in Daten zu erkennen und Vorhersagen zu treffen.\n\n---\n\n**KARTENVORDERSEITE (Frage / Konzept):**  \nWas versteht man unter überwachten Lernen?\n\n**KARTENRÜCKSEITE (Erklärung):**  \n- Prozess der Erstellung eines Modells auf Basis eines definierten Lerndatensatzes.  \n- Klassifikation und Regression sind die Hauptaufgaben.  \n- Labels sind kategorial (binär oder mehrere Klassen) oder kontinuierliche Werte.\n\n---\n\n**KARTENVORDERSEITE (Frage / Konzept):**  \nWas ist unüberwachtes Lernen?\n\n**KARTENRÜCKSEITE (Erklärung):**  \n- Erstellen eines Modells ohne Referenzdatensatz.  \n- Ziel ist es, Muster zu finden.  \n- Beispiele sind Clustering und Assoziationsregeln.\n\n---\n\n**KARTENVORDERSEITE (Frage / Konzept):**  \nWas ist eine Confusion Matrix?\n\n**KARTENRÜCKSEITE (Erklärung):**  \n- Eine Tabelle, die die Leistung eines Klassifikationsmodells zeigt.  \n- Sie zeigt die Anzahl der richtigen und falschen Vorhersagen.  \n- Hilfreich zur Berechnung von Metriken wie Genauigkeit, Präzision und Recall.\n\n---\n\n**KARTENVORDERSEITE (Frage / Konzept):**  \nWas sind false positives und false negatives?\n\n**KARTENRÜCKSEITE (Erklärung):**  \n- False positives: Fälschlicherweise als positiv klassifizierte negative Instanzen.  \n- False negatives: Fälschlicherweise als negativ klassifizierte positive Instanzen.  \n- Wichtig für die Bewertung der Modellleistung.\n\n---\n\n**KARTENVORDERSEITE (Frage / Konzept):**  \nWas ist der k-Nearest Neighbor Algorithmus?\n\n**KARTENRÜCKSEITE (Erklärung):**  \n- Ein Klassifikationsverfahren, das die Klasse eines neuen Merkmalsvektors durch die Klassen der k nächsten Nachbarn bestimmt.  \n- Kann auf mehr als zwei Klassen angewendet werden.  \n- Die Wahl von k beeinflusst die Klassifikationsergebnisse.\n\n---\n\n**KARTENVORDERSEITE (Frage / Konzept):**  \nWas sind Entscheidungsbäume?\n\n**KARTENRÜCKSEITE (Erklärung):**  \n- Ein Modell, das Entscheidungen in Form eines Baumes darstellt.  \n- Es wird rekursiv aufgebaut, indem nach dem Attribut mit dem höchsten Maß an Unreinheit gesplittet wird.  \n- Heuristische Algorithmen werden verwendet, um die Effizienz zu steigern.\n\n---\n\n**KARTENVORDERSEITE (Frage / Konzept):**  \nWas ist der Unterschied zwischen Klassifikation und Regression?\n\n**KARTENRÜCKSEITE (Erklärung):**  \n- Klassifikation: Vorhersage von kategorialen Labels (z.B. Genre von Filmen).  \n- Regression: Vorhersage von kontinuierlichen Werten (z.B. Verkaufszahlen).  \n- Beide sind Teil des überwachten Lernens.\n\n---\n\n**KARTENVORDERSEITE (Frage / Konzept):**  \nWas sind typische Aufgaben im maschinellen Lernen?\n\n**KARTENRÜCKSEITE (Erklärung):**  \n- Überwachtes Lernen: Klassifikation und Regression.  \n- Unüberwachtes Lernen: Clustering und Assoziationsregeln.  \n- Ziel ist es, Muster zu erkennen und Vorhersagen zu treffen.\n\n---\n\n**KARTENVORDERSEITE (Frage / Konzept):**  \nWas ist Overfitting?\n\n**KARTENRÜCKSEITE (Erklärung):**  \n- Overfitting tritt auf, wenn ein Modell zu stark an die Trainingsdaten angepasst wird.  \n- Die Fehlerrate auf den Trainingsdaten sinkt, während sie auf den Testdaten steigt.  \n- Um Overfitting zu vermeiden, kann man das Lernen bei einer bestimmten Anzahl von Knoten abbrechen.",
+      "sources": [
+        "03_MaschinellesLernen.pdf (S. 16)",
+        "03_MaschinellesLernen.pdf (S. 2)",
+        "03_MaschinellesLernen.pdf (S. 20)",
+        "03_MaschinellesLernen.pdf (S. 3)",
+        "03_MaschinellesLernen.pdf (S. 8)",
+        "04_NeuronaleNetze.pdf (S. 21)",
+        "04_NeuronaleNetze.pdf (S. 30)",
+        "05_Fragenkatalog.pdf (S. 2)"
+      ],
+      "timestamp": "2026-06-16T10:06:44.091842Z"
+    }
+  ],
+  "last_updated": "2026-06-16T10:06:44.091842Z"
+}
