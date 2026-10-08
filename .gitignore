@@ -1,6 +1,15 @@
+# Secrets (Vorlage: backend/.env.example)
+.env
+*.env
+!.env.example
+
 # Python
 .venv/
+venv/
 __pycache__/
+
+# Laufzeitdaten (Chat-Verläufe, werden automatisch erzeugt)
+backend/sessions/
 
 # Node
 node_modules/
